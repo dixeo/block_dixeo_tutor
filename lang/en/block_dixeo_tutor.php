@@ -1,0 +1,80 @@
+<?php
+
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * English language strings for the Dixeo Student Tutor block.
+ *
+ * @package    block_dixeo_tutor
+ * @copyright  2025 Edunao SAS (contact@edunao.com)
+ * @author     Pierre FACQ <pierre.facq@edunao.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+defined('MOODLE_INTERNAL') || die();
+
+$string['pluginname']  = 'Dixeo Student Tutor';
+$string['editingmode'] = 'Dixeo Student Tutor is not available in editing mode.';
+$string['quizrestriction'] = 'Dixeo Student Tutor is not available on quiz pages.';
+$string['filecountlimit'] = 'The AI tutor is limited to 150 files per course (currently {$a} files). Please reduce the number of files if needed.';
+$string['notenrolled'] = 'You must be enrolled in this course to use the tutor.';
+$string['errorsendmessage'] = 'Sorry, there was an error sending your message. Please try again.';
+$string['error_apierror'] = 'Sorry, there was a problem communicating with the AI service.';
+$string['unknownerror'] = 'An unknown error occurred.';
+$string['talktotutor'] = 'Talk to the tutor';
+
+// Other UI Strings
+$string['assistanttitle'] = 'Ask Ed';
+$string['tutorpresentation'] = "Hi! I'm Ed, your AI tutor. How can I help you with this course?";
+$string['placeholder'] = 'Type your message...';
+$string['send'] = 'Send';
+$string['retry'] = 'Retry'; // For error messages
+
+// Timeout and error handling strings.
+$string['timeout_message'] = 'The response is taking longer than expected. The assistant may still be working on your request.';
+$string['check_for_updates'] = 'Check for updates';
+$string['error_check_updates'] = 'Unable to check for updates. Please try refreshing the page.';
+$string['error_timeout'] = 'Request timed out. Please check your connection and try again.';
+$string['error_network'] = 'Network error occurred. Please check your connection and try again.';
+
+$string['connection_lost'] = 'Connection lost. Attempting to reconnect...';
+$string['yesterday'] = 'yesterday';
+
+// Accessibility strings.
+$string['aria_chat_messages'] = 'Chat messages';
+$string['aria_type_message'] = 'Type your message';
+$string['aria_send_message'] = 'Send message';
+$string['aria_skip_to_input'] = 'Skip to message input';
+$string['aria_your_message'] = 'Your message';
+$string['aria_assistant_message'] = 'Assistant message';
+$string['aria_sender_you'] = 'You';
+$string['aria_sender_assistant'] = 'Assistant';
+$string['message_too_long'] = 'Message cannot exceed {$a} characters.';
+
+$string['dixeo_tutor:addinstance'] = 'Add a new Dixeo Student Tutor block';
+$string['dixeo_tutor:talktotutor'] = 'Interact with the AI Tutor';
+
+// Settings.
+$string['setting_excludedmodules'] = 'Excluded module types';
+$string['setting_excludedmodules_desc'] = 'Comma-separated list of activity module types where the tutor should be hidden (e.g. quiz,simplequiz). The tutor will not appear on pages of these activity types.';
+
+// Privacy.
+$string['privacy:metadata:userid'] = 'The ID of the user sending the message.';
+$string['privacy:metadata:courseid'] = 'The ID of the course the user is enrolled in.';
+$string['privacy:metadata:message'] = 'The content of the message sent by the user.';
+$string['privacy:metadata:pageurl'] = 'The URL of the page the user was on when sending the message.';
+$string['privacy:metadata:externalpurpose'] = 'User messages are sent to the Dixeo API to generate AI tutor responses based on the course content.';
+

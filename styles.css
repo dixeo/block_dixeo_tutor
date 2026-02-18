@@ -1,0 +1,290 @@
+#dixeo-tutor {
+    --tutor-main-color: var(--primary);
+    --tutor-text-color: #fff;
+    height: 100%;
+}
+
+/* Title of the block */
+.dixeo-tutor-title {
+    color: var(--tutor-main-color);
+}
+
+/* Collapse toggle header */
+#dixeo-tutor > .card-header {
+    cursor: pointer;
+}
+
+/* Messages container */
+#dixeo-tutor-messages {
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* Message Bubbles */
+.dixeo-tutor-message {
+    position: relative;      /* Needed for absolutely-positioned timestamp */
+    display: inline-block;   /* Let the bubble grow to the width of the text */
+    vertical-align: bottom;
+    max-width: 70%;          /* Adjust if you want wider/narrower bubbles */
+    margin-bottom: 12px;
+    padding: 10px 15px 25px 15px; /* Extra bottom padding for the timestamp */
+    border-radius: 10px;
+    word-wrap: break-word;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+/* User bubble */
+.dixeo-tutor-message-user {
+    background-color: var(--tutor-main-color);
+    color: var(--tutor-text-color);
+    margin-left: auto;
+    margin-right: 5px;
+    min-width: 70px;
+}
+
+.dixeo-tutor-message-user a {
+    color: var(--tutor-text-color);
+}
+
+/* This color is a variable as the background-color is able to be changed, and the text should always be readable */
+.dixeo-tutor-message-user .message-time {
+    color: var(--tutor-text-color);
+}
+
+/* User message bubble tail */
+.dixeo-tutor-message-user::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    bottom: 10px; /* Make sure it aligns properly above the time */
+    border: 8px solid transparent;
+    border-left-color: var(--tutor-main-color);
+}
+
+/* Assistant bubble */
+.dixeo-tutor-message-assistant {
+    background-color: unset;
+    margin-left: 5px;
+    margin-right: auto;
+    box-shadow: unset;
+    max-width: 95%;
+    padding-left: 25px;
+}
+
+.dixeo-tutor-message-assistant .message-time {
+    color: #777;
+}
+
+.dixeo-tutor-message-assistant:before {
+    content:"\f075"; /* It is the content of fa fa-comment */
+    font-family: "Font Awesome 6 Free", FontAwesome, sans-serif; /* Needed to display the icon */
+    position: absolute; /* We put it on the right of the content */
+    top: 0.7rem;
+    left: -5px;
+    height: 20px;
+    width: 20px;
+    border-radius: 30%;
+    padding-left: 2.5px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--tutor-main-color);
+    border: solid 1px var(--tutor-main-color);
+}
+
+/* Error bubble */
+.dixeo-tutor-message-error {
+    max-width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* A centered, non-bubble style for system messages like the loader. */
+.dixeo-tutor-message-system {
+    color: var(--gray-600, #6c757d);
+    text-align: center;
+    padding: 10px 15px;
+    max-width: 80%;
+}
+
+/* Timestamp: pinned bottom-right */
+.message-time {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    font-size: 0.75em;
+    white-space: nowrap; /* Ensures it stays on one line */
+}
+
+/* Input Area */
+#dixeo-tutor-input {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    min-height: 40px;
+    padding: 7px 15px;
+    font-size: 16px;
+    resize: none;
+    outline: none;
+}
+#dixeo-tutor-input:focus {
+    border-color: #66afe9;
+    box-shadow: 0 0 3px rgba(102, 175, 233, .6);
+}
+#dixeo-tutor-input.max-resize {
+    overflow-y: auto; /* Show scrollbar when max-height is reached */
+}
+
+#dixeo-tutor-send {
+    background: none !important;
+    border: none;
+    padding: 0;
+    margin-left: 10px;
+    color: var(--tutor-main-color);
+}
+#dixeo-tutor-send[disabled],
+#dixeo-tutor-send:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: default;
+}
+/* A subtle hover effect on the send button */
+#dixeo-tutor-send:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+#dixeo-tutor-send i {
+    font-size: 24px;
+}
+
+/* Style for the date separator between messages from history */
+.dixeo-tutor-separator {
+    margin-bottom: 0.5rem;
+}
+
+.dixeo-tutor-separator span {
+    color: rgba(0,0,0,.3);
+    font-size: 0.8rem;
+}
+
+.dixeo-tutor-separator hr {
+    width: 100%;
+    margin: 0.7rem auto;
+}
+
+/* Force block to take full width and height if dixeo_tutor is present */
+.drawercontent > div:has(.block_dixeo_tutor),
+.drawercontent > div > aside:has(.block_dixeo_tutor),
+.drawercontent > section:has(.block_dixeo_tutor),
+.drawercontent > section > aside:has(.block_dixeo_tutor) {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-bottom: 25px;
+}
+.drawercontent .block_dixeo_tutor {
+    min-height: 0;
+    overflow: hidden;
+}
+.drawercontent .block_dixeo_tutor .card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+.drawercontent .block_dixeo_tutor > .card-body {
+    display: flex;
+    padding: 0 !important;
+    min-height: 0;
+}
+.drawercontent .block_dixeo_tutor > .card-body > .card-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-top: 0 !important;
+    min-height: 0;
+}
+.drawercontent .block_dixeo_tutor #dixeo-tutor-messages {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 290px !important;
+}
+.drawercontent .block_dixeo_tutor .card-footer {
+    flex-shrink: 0;
+}
+
+
+/* Collapse button */
+.dixeo-collapsed .card-body,
+.dixeo-collapsed .card-footer {
+    display: none !important;
+}
+.dixeo-collapsed .dixeo-tutor-toggle {
+    transform: rotate(90deg);
+}
+.drawer.drawer-right .drawertoggle {
+    background-color: #f8f9fa;
+    margin-right: 12px;
+}
+.drawer.scrolled .drawerheader {
+    box-shadow: none;
+}
+
+
+/* Chat three dots loader */
+.chat-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+.chat-dots span {
+    width: 8px;
+    height: 8px;
+    background-color: #ccc;
+    border-radius: 50%;
+    animation: chat-dots 1.2s infinite ease-in-out;
+}
+.chat-dots span:nth-child(1) {
+    animation-delay: 0s;
+}
+.chat-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+.chat-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+@keyframes chat-dots {
+    0%, 80%, 100% {
+        transform: scale(0);
+        opacity: 0.3;
+    }
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Connection lost banner */
+.dixeo-tutor-connection-lost {
+    background-color: var(--danger);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin-top: 10px;
+    border-radius: 4px;
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+}
+
+/* Editing mode styles */
+.editing .drawercontent .block_dixeo_tutor>.card-body {
+    display: block;
+}
+
+.editing .drawercontent .block_dixeo_tutor>.card-body>.card-text {
+    display: block;
+    margin: 25px 15px 15px 15px !important;
+}
