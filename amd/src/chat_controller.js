@@ -222,15 +222,15 @@ define([
                     window.location.href
                 );
 
-                if (response.error_message) {
+                if (response.errormessage) {
                     this.state.setPending(false);
                     this.ui.enableInput();
-                    this.ui.appendErrorMessage(response.error_message);
+                    this.ui.appendErrorMessage(response.errormessage);
                     return;
                 }
 
-                // Store job_id and start polling.
-                const jobId = response.job_id;
+                // Store jobid and start polling.
+                const jobId = response.jobid;
                 this.state.savePollState({isPending: true, jobId: jobId, timestamp: Date.now()});
                 this._pollForJobCompletion(jobId);
 

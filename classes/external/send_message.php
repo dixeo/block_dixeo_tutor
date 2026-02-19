@@ -110,18 +110,18 @@ class send_message extends external_api {
     public static function execute_returns(): external_single_structure {
         return new external_single_structure([
             'completed' => new external_value(PARAM_BOOL, 'Whether the operation has completed'),
-            'job_id' => new external_value(PARAM_RAW, 'The job UUID'),
+            'jobid' => new external_value(PARAM_RAW, 'The job UUID'),
             'result' => new external_single_structure([
                 'data' => new external_single_structure([
                     'name' => new external_value(PARAM_RAW, 'Generated name', VALUE_OPTIONAL),
                     'content' => new external_value(PARAM_RAW, 'Generated content', VALUE_OPTIONAL),
                 ], 'Result data', VALUE_OPTIONAL),
             ], 'The result data', VALUE_OPTIONAL),
-            'credits_used' => new external_value(PARAM_INT, 'Credits consumed', VALUE_OPTIONAL),
+            'creditsused' => new external_value(PARAM_INT, 'Credits consumed', VALUE_OPTIONAL),
             'status' => new external_value(PARAM_ALPHA, 'Current status', VALUE_OPTIONAL),
             'progress' => new external_value(PARAM_INT, 'Progress percentage (0-100)'),
-            'error_message' => new external_value(PARAM_RAW, 'Error message if failed', VALUE_OPTIONAL),
-            'error_code' => new external_value(PARAM_ALPHANUMEXT, 'Error code if failed', VALUE_OPTIONAL),
+            'errormessage' => new external_value(PARAM_RAW, 'Error message if failed', VALUE_OPTIONAL),
+            'errorcode' => new external_value(PARAM_ALPHANUMEXT, 'Error code if failed', VALUE_OPTIONAL),
         ]);
     }
 }

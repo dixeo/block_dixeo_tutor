@@ -85,24 +85,24 @@ class get_job_status extends external_api {
      */
     public static function execute_returns(): external_single_structure {
         return new external_single_structure([
-            'job_id' => new external_value(PARAM_RAW, 'The job UUID'),
+            'jobid' => new external_value(PARAM_RAW, 'The job UUID'),
             'type' => new external_value(PARAM_ALPHANUMEXT, 'Job type', VALUE_OPTIONAL),
             'status' => new external_value(PARAM_ALPHANUMEXT, 'Current status'),
             'progress' => new external_value(PARAM_INT, 'Progress percentage (0-100)'),
-            'created_at' => new external_value(PARAM_INT, 'Creation timestamp'),
-            'updated_at' => new external_value(PARAM_INT, 'Last update timestamp', VALUE_OPTIONAL),
-            'completed_at' => new external_value(PARAM_INT, 'Completion timestamp', VALUE_OPTIONAL),
+            'createdat' => new external_value(PARAM_INT, 'Creation timestamp'),
+            'updatedat' => new external_value(PARAM_INT, 'Last update timestamp', VALUE_OPTIONAL),
+            'completedat' => new external_value(PARAM_INT, 'Completion timestamp', VALUE_OPTIONAL),
             'result' => new external_single_structure([
                 'reply' => new external_value(PARAM_RAW, 'The assistant reply', VALUE_OPTIONAL),
             ], 'Result data', VALUE_OPTIONAL),
-            'credits_used' => new external_value(PARAM_INT, 'Credits consumed', VALUE_OPTIONAL),
+            'creditsused' => new external_value(PARAM_INT, 'Credits consumed', VALUE_OPTIONAL),
             'error' => new external_single_structure([
                 'type' => new external_value(PARAM_RAW, 'Error type', VALUE_OPTIONAL),
                 'title' => new external_value(PARAM_RAW, 'Error title', VALUE_OPTIONAL),
                 'status' => new external_value(PARAM_INT, 'HTTP status code', VALUE_OPTIONAL),
                 'detail' => new external_value(PARAM_RAW, 'Error detail', VALUE_OPTIONAL),
             ], 'Error details (RFC 7807)', VALUE_OPTIONAL),
-            'processing_time_seconds' => new external_value(PARAM_FLOAT, 'Processing time', VALUE_OPTIONAL),
+            'processingtimeseconds' => new external_value(PARAM_FLOAT, 'Processing time', VALUE_OPTIONAL),
             'namespace' => new external_value(PARAM_RAW, 'Job namespace', VALUE_OPTIONAL),
         ]);
     }
