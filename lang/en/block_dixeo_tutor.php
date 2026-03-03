@@ -68,6 +68,12 @@ $string['dixeo_tutor:addinstance'] = 'Add a new Dixeo Student Tutor block';
 $string['dixeo_tutor:talktotutor'] = 'Interact with the AI Tutor';
 
 // Settings.
+$string['setting_displaymode'] = 'Display mode';
+$string['setting_displaymode_desc'] = 'Show the tutor in the block drawer (side panel) or in a floating popup window opened via a button.';
+$string['setting_displaymode_drawer'] = 'In block drawer';
+$string['setting_displaymode_popup'] = 'In a popup window';
+$string['tooltip_open_tutor'] = 'Open Dixeo Tutor';
+$string['tooltip_hide_tutor'] = 'Hide Dixeo Tutor';
 $string['setting_excludedmodules'] = 'Excluded module types';
 $string['setting_excludedmodules_desc'] = 'Comma-separated list of activity module types where the tutor should be hidden (e.g. quiz,simplequiz). The tutor will not appear on pages of these activity types.';
 

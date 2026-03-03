@@ -26,6 +26,18 @@
 defined('MOODLE_INTERNAL') || die();
 
 if ($ADMIN->fulltree) {
+    // Display mode: in block drawer or in a popup window.
+    $settings->add(new admin_setting_configselect(
+        'block_dixeo_tutor/displaymode',
+        get_string('setting_displaymode', 'block_dixeo_tutor'),
+        get_string('setting_displaymode_desc', 'block_dixeo_tutor'),
+        'popup',
+        [
+            'drawer' => get_string('setting_displaymode_drawer', 'block_dixeo_tutor'),
+            'popup' => get_string('setting_displaymode_popup', 'block_dixeo_tutor'),
+        ]
+    ));
+
     // Excluded module types (comma-separated).
     $settings->add(new admin_setting_configtextarea(
         'block_dixeo_tutor/excludedmodules',

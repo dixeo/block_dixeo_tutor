@@ -94,7 +94,19 @@ class block_dixeo_tutor extends block_base {
 
         // Render the tutor interface and initialize JavaScript.
         $this->content->text = $OUTPUT->render_from_template('block_dixeo_tutor/tutor', []);
-        $this->page->requires->js_call_amd('block_dixeo_tutor/tutor', 'init', [$courseid, $USER->id]);
+        $displaymode = get_config('block_dixeo_tutor', 'displaymode');
+        if ($displaymode === false) {
+            $displaymode = 'popup';
+        }
+        $openTooltip = get_string('tooltip_open_tutor', 'block_dixeo_tutor');
+        $hideTooltip = get_string('tooltip_hide_tutor', 'block_dixeo_tutor');
+        $this->page->requires->js_call_amd('block_dixeo_tutor/tutor', 'init', [
+            $courseid,
+            $USER->id,
+            $displaymode,
+            $openTooltip,
+            $hideTooltip
+        ]);
         return $this->content;
     }
 

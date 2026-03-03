@@ -68,6 +68,12 @@ $string['dixeo_tutor:addinstance'] = 'Agregar un nuevo bloque del Tutor Estudian
 $string['dixeo_tutor:talktotutor'] = 'Interactuar con el Tutor de IA';
 
 // Configuración.
+$string['setting_displaymode'] = 'Modo de visualización';
+$string['setting_displaymode_desc'] = 'Mostrar el tutor en el cajón de bloques (panel lateral) o en una ventana emergente flotante abierta con un botón.';
+$string['setting_displaymode_drawer'] = 'En el cajón de bloques';
+$string['setting_displaymode_popup'] = 'En una ventana emergente';
+$string['tooltip_open_tutor'] = 'Abrir Dixeo Tutor';
+$string['tooltip_hide_tutor'] = 'Ocultar Dixeo Tutor';
 $string['setting_excludedmodules'] = 'Tipos de módulos excluidos';
 $string['setting_excludedmodules_desc'] = 'Lista de tipos de módulos de actividad separados por comas donde el tutor debe ocultarse (ej: quiz,simplequiz). El tutor no aparecerá en las páginas de estos tipos de actividad.';
 
