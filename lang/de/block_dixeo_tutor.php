@@ -37,8 +37,8 @@ $string['unknownerror'] = 'Ein unbekannter Fehler ist aufgetreten.';
 $string['talktotutor'] = 'Mit dem Tutor sprechen';
 
 // Weitere UI-Strings.
-$string['assistanttitle'] = 'Frag Ed';
-$string['tutorpresentation'] = 'Hallo! Ich bin Ed, dein KI-Tutor. Wie kann ich dir bei diesem Kurs helfen?';
+$string['assistanttitle'] = 'Fragen Sie Ed';
+$string['tutorpresentation'] = 'Hallo! Ich bin Ed, Ihr KI-Tutor. Wie kann ich Ihnen bei diesem Kurs helfen?';
 $string['placeholder'] = 'Nachricht eingeben...';
 $string['send'] = 'Senden';
 $string['retry'] = 'Erneut versuchen';
