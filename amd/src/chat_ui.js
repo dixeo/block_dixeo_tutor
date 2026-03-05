@@ -71,13 +71,6 @@ define([
               return;
             }
 
-            // Bind collapse toggle on header (replaces inline onclick).
-            if (this.dom.header) {
-                this.dom.header.addEventListener('click', () => {
-                    this.dom.container.classList.toggle('dixeo-collapsed');
-                });
-            }
-
             a11y.setupARIA(this.dom);
             a11y.setupKeyboardNavigation(
                 this.dom.messagesContainer,
