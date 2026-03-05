@@ -20,6 +20,8 @@ define([
             this.pendingIndicator = null;
             // Tracks whether the "Today" date separator has been added this session.
             this.todaySeparatorAdded = false;
+            // User scrolled up to read older messages; reset when at bottom or scrollToBottom is called.
+            this._userScrolledUp = false;
             // Pre-fetched to avoid async race when the first message arrives quickly.
             this.todayLabel = null;
             this.strings = {};
@@ -99,7 +101,23 @@ define([
                 this._adjustTextareaHeight();
                 this._validateInputLength();
             });
+            this._boundScrollHandler = () => this._onMessagesScroll();
+            this.dom.messagesContainer.addEventListener('scroll', this._boundScrollHandler, { passive: true });
             this._adjustTextareaHeight();
+        }
+
+        /**
+         * Handles scroll on the message container to track when user has scrolled up from the bottom.
+         * @private
+         */
+        _onMessagesScroll() {
+            const el = this.dom.messagesContainer;
+            if (!el) {
+                return;
+            }
+            const threshold = constants.ui.SCROLL_BOTTOM_THRESHOLD;
+            const atBottom = el.scrollHeight - el.scrollTop - el.clientHeight <= threshold;
+            this._userScrolledUp = !atBottom;
         }
 
         /**
@@ -203,8 +221,8 @@ define([
                         this.todaySeparatorAdded = true;
                     }
                 }
-                // Pass false to skip date checks — we already handle separators above.
-                this.appendMessage(msg, false);
+                // Pass false to skip date checks; false to skip per-message scroll — we scroll once at end.
+                this.appendMessage(msg, false, false);
             });
             this.scrollToBottom();
         }
@@ -254,8 +272,9 @@ define([
          * Appends a single message to the chat container.
          * @param {object} msg The message object to append.
          * @param {boolean} [checkDate=true] Whether to check for and add a date separator.
+         * @param {boolean} [scroll=true] Whether to scroll to bottom after appending (set false when batch-rendering).
          */
-        appendMessage(msg, checkDate = true) {
+        appendMessage(msg, checkDate = true, scroll = true) {
             // Idempotency guard — skip if already rendered.
             if (msg.id && this.hasMessage(msg.id)) {
                 return;
@@ -296,7 +315,9 @@ define([
             const announcement = `${sender}: ${msg.content.substring(0, 100)}`;
             a11y.announce(announcement);
 
-            this.scrollToBottom();
+            if (scroll) {
+                this.scrollToBottom();
+            }
         }
 
         /**
@@ -386,10 +407,41 @@ define([
         }
 
         /**
+         * Whether the user has scrolled up from the bottom (to read older messages).
+         * Reset to false when the user scrolls back to the bottom or when scrollToBottom is called.
+         * @returns {boolean}
+         */
+        hasUserScrolledUp() {
+            return this._userScrolledUp;
+        }
+
+        /**
          * Scrolls the message container to the very bottom.
+         * Uses immediate scroll + rAF + scrollIntoView on last child so it works after load and when new messages arrive.
+         * Also resets the user-scrolled-up tracker to false.
          */
         scrollToBottom() {
-            this.dom.messagesContainer.scrollTop = this.dom.messagesContainer.scrollHeight;
+            this._userScrolledUp = false;
+            const el = this.dom.messagesContainer;
+            if (!el) {
+                return;
+            }
+            const doScroll = () => {
+                el.scrollTop = el.scrollHeight;
+            };
+            // Immediate scroll so we don't wait for rAF.
+            doScroll();
+            // After layout: scroll again and, if possible, scroll last element into view (handles late layout/images).
+            requestAnimationFrame(() => {
+                doScroll();
+                const lastChild = el.lastElementChild;
+                if (lastChild) {
+                    lastChild.scrollIntoView({ block: 'end', behavior: 'instant' });
+                } else {
+                    doScroll();
+                }
+                requestAnimationFrame(doScroll);
+            });
         }
 
         /**
@@ -553,6 +605,11 @@ define([
         destroy() {
             this._removeSystemMessage();
             this._removeConnectionLostBanner();
+
+            if (this.dom.messagesContainer && this._boundScrollHandler) {
+                this.dom.messagesContainer.removeEventListener('scroll', this._boundScrollHandler);
+                this._boundScrollHandler = null;
+            }
 
             if (this.ariaLiveRegion) {
                 this.ariaLiveRegion.remove();

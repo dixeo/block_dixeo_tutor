@@ -8,10 +8,11 @@ define([
 
     /**
      * Move the tutor block out of the drawer into a popup container and add floating toggle button.
+     * @param {object} ui The ChatUI instance (used to scroll to bottom after move).
      * @param {string} openTooltip Tooltip when tutor is closed.
      * @param {string} hideTooltip Tooltip when tutor is open.
      */
-    function initPopup(openTooltip, hideTooltip) {
+    function initPopup(ui, openTooltip, hideTooltip) {
         const tutorEl = document.getElementById('dixeo-tutor');
         if (!tutorEl) {
             return;
@@ -28,6 +29,11 @@ define([
         blockWrapper.parentNode.removeChild(blockWrapper);
         popupContainer.appendChild(blockWrapper);
         document.body.appendChild(popupContainer);
+
+        // Moving the node can reset the message container scroll; scroll to bottom after attach.
+        if (ui && typeof ui.scrollToBottom === 'function') {
+            ui.scrollToBottom();
+        }
 
         const openIconHtml = '<i class="fa fa-comment" aria-hidden="true"></i>';
         const closeIconHtml = '<i class="fa fa-times" aria-hidden="true"></i>';
@@ -56,7 +62,11 @@ define([
 
         btn.addEventListener('click', function() {
             const visible = popupContainer.classList.contains('dixeo-tutor-popup-visible');
+            const willOpen = !visible;
             setButtonState(!visible);
+            if (willOpen && !ui.hasUserScrolledUp()) {
+                ui.scrollToBottom();
+            }
         });
 
         // Close when clicking the backdrop (container), not when clicking the tutor panel.
@@ -86,7 +96,7 @@ define([
             controller.initialize();
 
             if (displaymode === 'popup' && openTooltip && hideTooltip) {
-                initPopup(openTooltip, hideTooltip);
+                initPopup(ui, openTooltip, hideTooltip);
             }
 
             // Detect block removal from the DOM (Moodle Boost AJAX navigation replaces page

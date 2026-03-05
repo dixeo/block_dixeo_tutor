@@ -15,6 +15,8 @@ define([], function() {
             TEXTAREA_MAX_HEIGHT: 120,
             TIME_FORMAT: { hour: '2-digit', minute: '2-digit' },
             MAX_MESSAGE_LENGTH: 2000,
+            /** Px from bottom to consider "at bottom" for user-scrolled-up tracker. */
+            SCROLL_BOTTOM_THRESHOLD: 20,
         }),
 
         // DOM Selectors
