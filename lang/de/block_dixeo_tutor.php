@@ -72,8 +72,8 @@ $string['setting_displaymode'] = 'Anzeigemodus';
 $string['setting_displaymode_desc'] = 'Tutor im Block-Schublade (Seitenpanel) oder in einem schwebenden Popup-Fenster per Button anzeigen.';
 $string['setting_displaymode_drawer'] = 'In der Block-Schublade';
 $string['setting_displaymode_popup'] = 'In einem Popup-Fenster';
-$string['tooltip_open_tutor'] = 'Dixeo Tutor öffnen';
-$string['tooltip_hide_tutor'] = 'Dixeo Tutor ausblenden';
+$string['tooltip_open_tutor'] = 'Frag Ed';
+$string['tooltip_hide_tutor'] = 'Ed schließen';
 $string['setting_excludedmodules'] = 'Ausgeschlossene Modultypen';
 $string['setting_excludedmodules_desc'] = 'Kommagetrennte Liste von Aktivitätsmodultypen, auf deren Seiten der Tutor ausgeblendet werden soll (z. B. quiz, simplequiz). Der Tutor erscheint nicht auf den Seiten dieser Aktivitätstypen.';
 

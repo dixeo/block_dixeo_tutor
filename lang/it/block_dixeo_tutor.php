@@ -72,8 +72,8 @@ $string['setting_displaymode'] = 'Modalità di visualizzazione';
 $string['setting_displaymode_desc'] = 'Mostra il tutor nel cassetto dei blocchi (pannello laterale) o in una finestra a comparsa aperta con un pulsante.';
 $string['setting_displaymode_drawer'] = 'Nel cassetto dei blocchi';
 $string['setting_displaymode_popup'] = 'In una finestra a comparsa';
-$string['tooltip_open_tutor'] = 'Apri Dixeo Tutor';
-$string['tooltip_hide_tutor'] = 'Nascondi Dixeo Tutor';
+$string['tooltip_open_tutor'] = 'Chiedi a Ed';
+$string['tooltip_hide_tutor'] = 'Chiudi Ed';
 $string['setting_excludedmodules'] = 'Tipi di moduli esclusi';
 $string['setting_excludedmodules_desc'] = 'Elenco separato da virgole dei tipi di moduli di attività in cui il tutor deve essere nascosto (es: quiz,simplequiz). Il tutor non apparirà nelle pagine di questi tipi di attività.';
 
