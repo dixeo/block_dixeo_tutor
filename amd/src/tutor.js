@@ -38,7 +38,8 @@ define([
         btn.setAttribute('aria-label', openTooltip);
         btn.title = openTooltip;
         btn.innerHTML = openIconHtml;
-        document.body.appendChild(btn);
+        const pageFooter = document.getElementById('page-footer');
+        (pageFooter || document.body).appendChild(btn);
 
         /**
          * Toggle popup visibility and update button icon/tooltip.
@@ -56,6 +57,13 @@ define([
         btn.addEventListener('click', function() {
             const visible = popupContainer.classList.contains('dixeo-tutor-popup-visible');
             setButtonState(!visible);
+        });
+
+        // Close when clicking the backdrop (container), not when clicking the tutor panel.
+        popupContainer.addEventListener('click', function(e) {
+            if (e.target === popupContainer) {
+                setButtonState(false);
+            }
         });
 
         setButtonState(false);
