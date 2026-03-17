@@ -75,7 +75,7 @@ $string['setting_displaymode_popup'] = 'In una finestra a comparsa';
 $string['tooltip_open_tutor'] = 'Chiedi a Ed';
 $string['tooltip_hide_tutor'] = 'Chiudi Ed';
 $string['setting_excludedmodules'] = 'Tipi di moduli esclusi';
-$string['setting_excludedmodules_desc'] = 'Elenco separato da virgole dei tipi di moduli di attività in cui il tutor deve essere nascosto (es: quiz,simplequiz). Il tutor non apparirà nelle pagine di questi tipi di attività.';
+$string['setting_excludedmodules_desc'] = 'Elenco separato da virgole dei tipi di moduli di attività in cui il tutor deve essere nascosto (es: quiz,simplequiz2). Il tutor non apparirà nelle pagine di questi tipi di attività.';
 
 // Privacy.
 $string['privacy:metadata:userid'] = 'L\'ID dell\'utente che invia il messaggio.';

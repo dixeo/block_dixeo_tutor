@@ -43,6 +43,6 @@ if ($ADMIN->fulltree) {
         'block_dixeo_tutor/excludedmodules',
         get_string('setting_excludedmodules', 'block_dixeo_tutor'),
         get_string('setting_excludedmodules_desc', 'block_dixeo_tutor'),
-        'quiz,simplequiz'
+        'quiz,simplequiz2'
     ));
 }

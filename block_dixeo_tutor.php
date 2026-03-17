@@ -36,7 +36,7 @@ class block_dixeo_tutor extends block_base {
     protected function get_excluded_modules(): array {
         $setting = get_config('block_dixeo_tutor', 'excludedmodules');
         if ($setting === false || $setting === '') {
-            return ['quiz', 'simplequiz'];
+            return ['quiz', 'simplequiz2'];
         }
         return array_map('trim', explode(',', $setting));
     }

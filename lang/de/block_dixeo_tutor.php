@@ -75,7 +75,7 @@ $string['setting_displaymode_popup'] = 'In einem Popup-Fenster';
 $string['tooltip_open_tutor'] = 'Frag Ed';
 $string['tooltip_hide_tutor'] = 'Ed schließen';
 $string['setting_excludedmodules'] = 'Ausgeschlossene Modultypen';
-$string['setting_excludedmodules_desc'] = 'Kommagetrennte Liste von Aktivitätsmodultypen, auf deren Seiten der Tutor ausgeblendet werden soll (z. B. quiz, simplequiz). Der Tutor erscheint nicht auf den Seiten dieser Aktivitätstypen.';
+$string['setting_excludedmodules_desc'] = 'Kommagetrennte Liste von Aktivitätsmodultypen, auf deren Seiten der Tutor ausgeblendet werden soll (z. B. quiz, simplequiz2). Der Tutor erscheint nicht auf den Seiten dieser Aktivitätstypen.';
 
 // Datenschutz.
 $string['privacy:metadata:userid'] = 'Die ID des Benutzers, der die Nachricht sendet.';

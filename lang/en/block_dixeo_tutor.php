@@ -75,7 +75,7 @@ $string['setting_displaymode_popup'] = 'In a popup window';
 $string['tooltip_open_tutor'] = 'Ask Ed';
 $string['tooltip_hide_tutor'] = 'Close Ed';
 $string['setting_excludedmodules'] = 'Excluded module types';
-$string['setting_excludedmodules_desc'] = 'Comma-separated list of activity module types where the tutor should be hidden (e.g. quiz,simplequiz). The tutor will not appear on pages of these activity types.';
+$string['setting_excludedmodules_desc'] = 'Comma-separated list of activity module types where the tutor should be hidden (e.g. quiz,simplequiz2). The tutor will not appear on pages of these activity types.';
 
 // Privacy.
 $string['privacy:metadata:userid'] = 'The ID of the user sending the message.';
