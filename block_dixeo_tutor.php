@@ -172,7 +172,8 @@ class block_dixeo_tutor extends block_base {
      * @return bool True to hide the block header
      */
     public function hide_header(): bool {
-        return true;
+        global $PAGE;
+        return !$PAGE->user_is_editing();
     }
 
     /**
