@@ -98,6 +98,10 @@ class block_dixeo_tutor extends block_base {
         if ($displaymode === false) {
             $displaymode = 'popup';
         }
+        // Theme Dixeo always presents the tutor in drawer mode.
+        if ($PAGE->theme->name === 'dixeo') {
+            $displaymode = 'drawer';
+        }
         $openTooltip = get_string('tooltip_open_tutor', 'block_dixeo_tutor');
         $hideTooltip = get_string('tooltip_hide_tutor', 'block_dixeo_tutor');
         $this->page->requires->js_call_amd('block_dixeo_tutor/tutor', 'init', [
