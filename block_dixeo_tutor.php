@@ -33,12 +33,55 @@ class block_dixeo_tutor extends block_base {
      *
      * @return array List of module names to exclude.
      */
-    protected function get_excluded_modules(): array {
+    public static function get_excluded_modules(): array {
         $setting = get_config('block_dixeo_tutor', 'excludedmodules');
         if ($setting === false || $setting === '') {
             return ['quiz', 'simplequiz2'];
         }
         return array_map('trim', explode(',', $setting));
+    }
+
+    /**
+     * Resolve activity module type on a module context page when $PAGE->cm is not set yet.
+     *
+     * @param \moodle_page $page
+     * @return string|null Module frankenstyle name (e.g. quiz) or null if not resolvable.
+     */
+    public static function resolve_modname_for_module_page(\moodle_page $page): ?string {
+        if ((int) $page->context->contextlevel !== CONTEXT_MODULE) {
+            return null;
+        }
+        $cmid = (int) $page->context->instanceid;
+        if ($cmid < 1) {
+            return null;
+        }
+        if (!empty($page->cm) && (int) $page->cm->id === $cmid) {
+            return $page->cm->modname;
+        }
+        if (empty($page->course->id) || (int) $page->course->id === SITEID) {
+            return null;
+        }
+        try {
+            $modinfo = get_fast_modinfo($page->course);
+            $cm = $modinfo->get_cm($cmid);
+            return $cm->modname;
+        } catch (\Throwable $e) {
+            return null;
+        }
+    }
+
+    /**
+     * Whether the given page is a module activity whose type is listed in excludedmodules.
+     *
+     * @param \moodle_page $page Page to evaluate (typically the global $PAGE).
+     * @return bool True if the tutor should be hidden on this page.
+     */
+    public static function is_current_page_excluded(\moodle_page $page): bool {
+        $modname = self::resolve_modname_for_module_page($page);
+        if ($modname === null || $modname === '') {
+            return false;
+        }
+        return in_array($modname, self::get_excluded_modules(), true);
     }
 
     /**
@@ -79,7 +122,7 @@ class block_dixeo_tutor extends block_base {
         }
 
         // Hide tutor on excluded module pages.
-        if ($this->is_current_page_excluded()) {
+        if (self::is_current_page_excluded($PAGE)) {
             return $this->content;
         }
 
@@ -112,26 +155,6 @@ class block_dixeo_tutor extends block_base {
             $hideTooltip
         ]);
         return $this->content;
-    }
-
-    /**
-     * Check if the current page should exclude the tutor.
-     *
-     * Determines whether the tutor should be hidden on the current page
-     * based on the module type and exclusion rules.
-     *
-     * @return bool True if the tutor should be hidden, false otherwise
-     */
-    protected function is_current_page_excluded(): bool {
-        global $PAGE;
-
-        // Only check exclusions for module context pages.
-        if ($PAGE->context->contextlevel !== CONTEXT_MODULE || empty($PAGE->cm)) {
-            return false;
-        }
-
-        // Check if current module type is in the exclusion list.
-        return in_array($PAGE->cm->modname, $this->get_excluded_modules());
     }
 
     /**
