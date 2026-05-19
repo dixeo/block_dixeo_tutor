@@ -132,9 +132,28 @@ define([
             const message = this.dom.inputField.value.trim();
             if (message) {
                 this.emit(constants.events.SEND_MESSAGE, message);
+                window.dispatchEvent(new CustomEvent('dixeo-tutor-user-sent-message'));
                 this.dom.inputField.value = '';
                 this._adjustTextareaHeight();
+                this._retainFocusInDrawer();
             }
+        }
+
+        /**
+         * Move focus to the message list so the keyboard can dismiss without leaving the
+         * drawer (Boost closes block drawers on resize when focus is outside drawercontent).
+         * @private
+         */
+        _retainFocusInDrawer() {
+            const el = this.dom.messagesContainer;
+            if (!el) {
+                this.dom.inputField.blur();
+                return;
+            }
+            if (!el.hasAttribute('tabindex')) {
+                el.setAttribute('tabindex', '-1');
+            }
+            el.focus({preventScroll: true});
         }
 
         /**

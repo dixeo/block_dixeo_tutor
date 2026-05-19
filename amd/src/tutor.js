@@ -47,6 +47,18 @@ define([
         const pageFooter = document.getElementById('page-footer');
         (pageFooter || document.body).appendChild(btn);
 
+        // Android may synthesize a backdrop click after send when the keyboard dismisses.
+        let backdropPointerStartedOnContainer = false;
+        let suppressBackdropCloseUntil = 0;
+
+        window.addEventListener('dixeo-tutor-user-sent-message', function() {
+            suppressBackdropCloseUntil = Date.now() + 2000;
+        });
+
+        popupContainer.addEventListener('pointerdown', function(e) {
+            backdropPointerStartedOnContainer = (e.target === popupContainer);
+        }, true);
+
         /**
          * Toggle popup visibility and update button icon/tooltip.
          * @param {boolean} open True to show popup, false to hide.
@@ -71,9 +83,13 @@ define([
 
         // Close when clicking the backdrop (container), not when clicking the tutor panel.
         popupContainer.addEventListener('click', function(e) {
-            if (e.target === popupContainer) {
+            if (Date.now() < suppressBackdropCloseUntil) {
+                return;
+            }
+            if (e.target === popupContainer && backdropPointerStartedOnContainer) {
                 setButtonState(false);
             }
+            backdropPointerStartedOnContainer = false;
         });
 
         setButtonState(false);
