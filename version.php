@@ -28,7 +28,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2026072201;
+$plugin->version   = 2026072202;
 $plugin->requires  = 2024100700;
 $plugin->component = 'block_dixeo_tutor';
 $plugin->maturity  = MATURITY_STABLE;
