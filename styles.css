@@ -1,5 +1,5 @@
 #dixeo-tutor {
-    --tutor-main-color: var(--primary);
+    --tutor-main-color: var(--primary, #02aaff);
     --tutor-text-color: #fff;
     height: 100%;
 }
@@ -66,12 +66,15 @@
 
 /* Assistant bubble */
 .dixeo-tutor-message-assistant {
-    background-color: unset;
     margin-left: 5px;
     margin-right: auto;
     box-shadow: unset;
     max-width: 95%;
     padding-left: 25px;
+
+    .dixeo-tutor-message-content {
+        background-color: #e8e9eb;
+    }
 }
 
 .dixeo-tutor-message-assistant .message-time {
@@ -83,7 +86,7 @@
     font-family: "Font Awesome 6 Free", FontAwesome, sans-serif; /* Needed to display the icon */
     position: absolute; /* We put it on the right of the content */
     top: 0.7rem;
-    left: -5px;
+    left: -25px;
     height: 20px;
     width: 20px;
     border-radius: 30%;
@@ -190,7 +193,9 @@
 }
 .drawercontent .block_dixeo_tutor > .card-body {
     display: flex;
+    height: 100%;
 }
+
 body:not(.editing) .drawercontent .block_dixeo_tutor > .card-body {
     padding: 0 !important;
 }
@@ -328,6 +333,7 @@ body:not(.editing) .drawercontent .block_dixeo_tutor > .card-body {
     display: flex;
     flex-direction: column;
     padding: 0.75rem !important;
+    height: 100%;
 }
 
 #dixeo-tutor-popup-container > section > .card-body {
