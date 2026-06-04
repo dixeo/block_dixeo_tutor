@@ -32,8 +32,8 @@ defined('MOODLE_INTERNAL') || die();
 $plugin->version   = 2026030300;
 $plugin->requires  = 2024100700;
 $plugin->component = 'block_dixeo_tutor';
-$plugin->maturity  = MATURITY_ALPHA;
-$plugin->release   = '4.0';
+$plugin->maturity  = MATURITY_STABLE;
+$plugin->release   = '4.0.0';
 $plugin->dependencies = [
     'local_dixeo' => ANY_VERSION,
 ];
