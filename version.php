@@ -29,11 +29,11 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2026030300;
+$plugin->version   = 2026070600;
 $plugin->requires  = 2024100700;
 $plugin->component = 'block_dixeo_tutor';
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '4.0.0';
+$plugin->release   = '4.1.0';
 $plugin->dependencies = [
-    'local_dixeo' => ANY_VERSION,
+    'local_dixeo' => 2026070600,
 ];
