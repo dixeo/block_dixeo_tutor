@@ -83,3 +83,5 @@ $string['privacy:metadata:courseid'] = 'L\'identifiant du cours auquel l\'utilis
 $string['privacy:metadata:message'] = 'Le contenu du message envoyé par l\'utilisateur.';
 $string['privacy:metadata:pageurl'] = 'L\'URL de la page sur laquelle se trouvait l\'utilisateur lors de l\'envoi du message.';
 $string['privacy:metadata:externalpurpose'] = 'Les messages des utilisateurs sont envoyés à l\'API Dixeo pour générer des réponses du tuteur IA basées sur le contenu du cours.';
+
+$string['resize_panel'] = 'Redimensionner le panneau du tuteur';

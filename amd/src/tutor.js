@@ -2,8 +2,15 @@ define([
     'block_dixeo_tutor/chat_controller',
     'block_dixeo_tutor/chat_state',
     'block_dixeo_tutor/chat_ui',
-    'block_dixeo_tutor/chat_api'
-], function(ChatController, ChatState, ChatUI, ChatAPI) {
+    'block_dixeo_tutor/chat_api',
+    'block_dixeo_tutor/tutor_panel_resize',
+], function(
+    ChatController,
+    ChatState,
+    ChatUI,
+    ChatAPI,
+    tutorPanelResize
+) {
     'use strict';
 
     /**
@@ -29,6 +36,14 @@ define([
         blockWrapper.parentNode.removeChild(blockWrapper);
         popupContainer.appendChild(blockWrapper);
         document.body.appendChild(popupContainer);
+
+        tutorPanelResize.createPanelResize({
+            panel: blockWrapper,
+            defaultWidth: 380,
+            minWidth: 320,
+            viewportMarginPx: 48,
+            panelCssVarName: '--dixeo-tutor-popup-width',
+        });
 
         // Moving the node can reset the message container scroll; scroll to bottom after attach.
         if (ui && typeof ui.scrollToBottom === 'function') {

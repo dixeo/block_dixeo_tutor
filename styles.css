@@ -2,47 +2,505 @@
     --tutor-main-color: var(--primary, #02aaff);
     --tutor-text-color: #fff;
     height: 100%;
+    max-height: 85vh;
 }
 
 /* Title of the block */
 .dixeo-tutor-title {
     color: var(--tutor-main-color);
+    flex: 0 1 auto;
+    min-width: 0;
+    margin-right: auto;
 }
 
-/* Collapse toggle header */
+/* Collapse toggle header — single row: title left, controls right */
 #dixeo-tutor > .card-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.75rem;
     cursor: pointer;
 }
 
+.dixeo-tutor-header__end {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 0.5rem;
+}
+
+#dixeo-tutor-header .dixeo-drawer-floating-close {
+    float: none;
+    flex-shrink: 0;
+}
+
 /* Messages container */
+.dixeo-tutor-chat-pane {
+    min-height: 0;
+    flex: 1 1 0;
+    overflow: hidden;
+}
+
 #dixeo-tutor-messages {
-    flex: 1;
+    flex: 1 1 0;
+    min-height: 0;
+    overflow-x: hidden;
     overflow-y: auto;
+}
+
+.dixeo-tutor-body {
+    min-height: 0;
+    flex: 1;
+}
+
+.dixeo-tutor-quiz-pane {
+    flex: 0 0 auto;
+    max-height: min(60vh, 100%);
+    overflow-y: auto;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 0.5rem;
+}
+
+.dixeo-tutor-body--quiz-active {
+    min-height: 0;
+}
+
+.dixeo-tutor-body--quiz-playing .dixeo-tutor-chat-pane {
+    display: none !important;
+}
+
+.dixeo-tutor-body--quiz-playing .dixeo-tutor-quiz-pane {
+    flex: 1 1 0;
+    min-height: 0;
+    max-height: none;
+    overflow-y: auto;
+    border-bottom: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.dixeo-tutor-body--quiz-playing .dixeo-tutor-quiz-pane .simplequiz2-embed {
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+#dixeo-tutor-quiz-pane #simplequiz-questions {
+    position: relative;
+    padding-top: 2.25rem;
+}
+
+#dixeo-tutor-quiz-pane .dixeo-tutor-quiz-panel-exit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+}
+
+.dixeo-tutor-teach-pane {
+    flex: 0 0 auto;
+    max-height: min(60vh, 100%);
+    overflow-y: auto;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 0.5rem;
+}
+
+.dixeo-tutor-body--teach-active {
+    min-height: 0;
+}
+
+.dixeo-tutor-body--teach-viewing .dixeo-tutor-chat-pane {
+    display: none !important;
+}
+
+.dixeo-tutor-body--teach-viewing .dixeo-tutor-teach-pane {
+    flex: 1 1 0;
+    min-height: 0;
+    max-height: none;
+    overflow: hidden;
+    border-bottom: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.dixeo-tutor-setup {
+    padding: 0.5rem;
+}
+
+.dixeo-tutor-setup__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.dixeo-tutor-setup__actions .btn + .btn {
+    margin-left: 0.5rem;
+}
+
+.dixeo-tutor-setup--instant,
+.dixeo-quiz-setup--instant,
+.dixeo-teach-setup--instant {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 4rem;
+    padding: 1rem 0.5rem;
+}
+
+.dixeo-tutor-setup__instant-spinner,
+.dixeo-quiz-setup__instant-spinner,
+.dixeo-teach-setup__instant-spinner {
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--tutor-main-color, #02aaff);
+}
+
+.dixeo-tutor-setup__topic-loading,
+.dixeo-quiz-setup__topic-loading,
+.dixeo-teach-setup__topic-loading {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    min-height: calc(1.5em + 0.5rem + 2px);
+    padding: 0.25rem 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.2rem;
+    background-color: rgba(0, 0, 0, 0.02);
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 0.875rem;
+}
+
+.dixeo-tutor-setup__topic-loading-icon,
+.dixeo-quiz-setup__topic-loading-icon {
+    flex-shrink: 0;
+    color: var(--tutor-main-color, #02aaff);
+}
+
+.dixeo-teach-setup {
+    padding: 0.5rem;
+}
+
+.dixeo-teach-setup__topic-select,
+.dixeo-teach-setup__prompt,
+.dixeo-teach-setup__language-select {
+    width: 100%;
+}
+
+.dixeo-teach-setup__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.dixeo-teach-setup__actions .btn + .btn {
+    margin-left: 0.5rem;
+}
+
+.dixeo-teach-setup--instant {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 4rem;
+    padding: 1rem 0.5rem;
+}
+
+.dixeo-teach-setup__instant-spinner {
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--tutor-main-color, #02aaff);
+}
+
+.dixeo-teach-setup__topic-loading {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    min-height: calc(1.5em + 0.5rem + 2px);
+    padding: 0.25rem 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.2rem;
+    background-color: rgba(0, 0, 0, 0.03);
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 0.875rem;
+}
+
+.dixeo-teach-lesson {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    min-height: 0;
+    height: 100%;
+}
+
+.dixeo-teach-lesson__header {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    flex-shrink: 0;
+}
+
+.dixeo-teach-lesson__title {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.dixeo-teach-lesson__header-actions {
+    display: flex;
+    flex-shrink: 0;
+    gap: 0.25rem;
+}
+
+.dixeo-teach-lesson__intro,
+.dixeo-teach-lesson__content {
+    padding: 1rem 1.5rem;
+}
+
+.dixeo-teach-lesson__intro {
+    flex-shrink: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    font-size: 0.9rem;
+}
+
+.dixeo-teach-lesson__content {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.dixeo-teach-lesson-modal__body {
+    padding: 1.5rem 2rem;
+    max-height: 75vh;
+    overflow-y: auto;
+}
+
+.modal-dialog-scrollable .modal-body:has(.dixeo-teach-lesson-modal__body) {
+    padding: 0;
+}
+
+.dixeo-tutor-generating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    min-height: 6rem;
+    padding: 1.5rem 0.5rem;
+    text-align: center;
+}
+
+.dixeo-tutor-generating__icon {
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--tutor-main-color, #02aaff);
+}
+
+.dixeo-tutor-generating__text {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 500;
+}
+
+.dixeo-quiz-setup__count-row .btn.active,
+.dixeo-quiz-setup__diff-row .btn.active {
+    font-weight: 600;
+}
+
+.dixeo-quiz-setup {
+    padding: 0.5rem;
+}
+
+.dixeo-quiz-setup__topic-select,
+.dixeo-quiz-setup__language-select {
+    width: 100%;
+}
+
+.dixeo-quiz-setup__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.dixeo-quiz-setup__actions .btn + .btn {
+    margin-left: 0.5rem;
+}
+
+.dixeo-quiz-setup--instant {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 4rem;
+    padding: 1rem 0.5rem;
+}
+
+.dixeo-quiz-setup__instant-spinner {
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--tutor-main-color, #02aaff);
+}
+
+.dixeo-quiz-setup__topic-loading {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    min-height: calc(1.5em + 0.5rem + 2px);
+    padding: 0.25rem 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.2rem;
+    background-color: rgba(0, 0, 0, 0.03);
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 0.875rem;
+}
+
+.dixeo-quiz-setup__topic-loading-icon {
+    flex-shrink: 0;
+    color: var(--tutor-main-color, #02aaff);
+}
+
+#dixeo-tutor-quiz-pane .simplequiz2-embed__header {
+    padding: 0 0.25rem;
+}
+
+#dixeo-tutor-quiz-pane .simplequiz2-embed__title {
+    font-size: 1rem;
 }
 
 /* Message Bubbles */
 .dixeo-tutor-message {
-    position: relative;      /* Needed for absolutely-positioned timestamp */
-    display: inline-block;   /* Let the bubble grow to the width of the text */
+    position: relative;
+    display: inline-block;
     vertical-align: bottom;
-    max-width: 70%;          /* Adjust if you want wider/narrower bubbles */
+    max-width: 70%;
     margin-bottom: 12px;
-    padding: 10px 15px 25px 15px; /* Extra bottom padding for the timestamp */
-    border-radius: 10px;
     word-wrap: break-word;
-    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
-    white-space: pre-wrap;
+    white-space: normal;
     overflow-wrap: break-word;
     word-break: break-word;
 }
 
+.dixeo-tutor-message-content {
+    background-color: var(--tutor-main-color);
+    box-shadow: 0 2px 3px rgb(0 0 0 / 0.1);
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.dixeo-tutor-message-content p:last-child {
+    margin: 0;
+}
+
+.dixeo-tutor-message-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    min-width: 130px;
+    min-height: 21px;
+    width: 100%;
+}
+
+.dixeo-tutor-message-actions {
+    display: flex;
+    gap: 3px;
+    flex-shrink: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s;
+}
+
+@media (hover: hover) {
+    .dixeo-tutor-message-row:hover .dixeo-tutor-message-actions {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+.dixeo-tutor-message-row:focus-within .dixeo-tutor-message-actions,
+.dixeo-tutor-message-row:has(.dixeo-tutor-tts-btn.playing) .dixeo-tutor-message-actions {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@media (hover: none) {
+    .dixeo-tutor-message-actions {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+/* Shared action button style (mirrors local_ai_course_assistant msg-actions buttons). */
+.dixeo-tutor-message-action-btn {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid #e5e7eb;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 3px 5px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: color 0.15s, background 0.15s;
+    backdrop-filter: blur(2px);
+}
+
+.dixeo-tutor-message-action-btn__icon {
+    font-size: 0.85rem;
+}
+
+@media (hover: hover) {
+    .dixeo-tutor-message-action-btn:hover {
+        color: #023e8a;
+        background: rgba(255, 255, 255, 0.98);
+    }
+}
+
+.dixeo-tutor-message-action-btn:focus-visible {
+    outline: 2px solid #023e8a;
+    outline-offset: 2px;
+}
+
+/* Copy: done state */
+.dixeo-tutor-copy-btn--done {
+    color: #16a34a !important;
+    background: rgba(255, 255, 255, 0.98) !important;
+}
+
+/* Speak/stop: active state */
+.dixeo-tutor-tts-btn.playing {
+    color: #ef4444 !important;
+    background: rgba(255, 255, 255, 0.98) !important;
+}
+
 /* User bubble */
 .dixeo-tutor-message-user {
-    background-color: var(--tutor-main-color);
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 0 !important;
     color: var(--tutor-text-color);
     margin-left: auto;
     margin-right: 5px;
-    min-width: 70px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: fit-content;
+    max-width: 70%;
+}
+
+#dixeo-tutor .dixeo-tutor-message-user .dixeo-tutor-message-content {
+    width: fit-content;
+    min-width: 60px;
 }
 
 .dixeo-tutor-message-user a {
@@ -51,17 +509,13 @@
 
 /* This color is a variable as the background-color is able to be changed, and the text should always be readable */
 .dixeo-tutor-message-user .message-time {
-    color: var(--tutor-text-color);
+    color: #777;
+    bottom: 3px;
 }
 
 /* User message bubble tail */
 .dixeo-tutor-message-user::after {
-    content: '';
-    position: absolute;
-    right: -8px;
-    bottom: 10px; /* Make sure it aligns properly above the time */
-    border: 8px solid transparent;
-    border-left-color: var(--tutor-main-color);
+    display: none;
 }
 
 /* Assistant bubble */
@@ -70,6 +524,7 @@
     margin-right: auto;
     box-shadow: unset;
     max-width: 95%;
+    padding: 0;
     padding-left: 25px;
 
     .dixeo-tutor-message-content {
@@ -86,7 +541,7 @@
     font-family: "Font Awesome 6 Free", FontAwesome, sans-serif; /* Needed to display the icon */
     position: absolute; /* We put it on the right of the content */
     top: 0.7rem;
-    left: -25px;
+    left: 0;
     height: 20px;
     width: 20px;
     border-radius: 30%;
@@ -95,6 +550,16 @@
     font-weight: bold;
     color: var(--tutor-main-color);
     border: solid 1px var(--tutor-main-color);
+}
+
+#dixeo-tutor  .dixeo-tutor-message-assistant.dixeo-tutor-loading {
+    min-height: 20px;
+    margin: 15px 0 0 0 !important;
+}
+
+#dixeo-tutor .dixeo-tutor-message-assistant.dixeo-tutor-loading::before {
+    bottom: 10px;
+    top: unset;
 }
 
 /* Error bubble */
@@ -112,13 +577,14 @@
     max-width: 80%;
 }
 
-/* Timestamp: pinned bottom-right */
+/* Timestamp in message footer */
 .message-time {
-    position: absolute;
-    right: 10px;
-    bottom: 5px;
+    position: relative;
+    margin-left: 20px;
+    margin-top: 5px;
     font-size: 0.75em;
-    white-space: nowrap; /* Ensures it stays on one line */
+    white-space: nowrap;
+    bottom: 2px;
 }
 
 /* Input Area */
@@ -159,6 +625,7 @@
 }
 #dixeo-tutor-send i {
     font-size: 24px;
+    color: var(--tutor-main-color) !important;
 }
 
 /* Style for the date separator between messages from history */
@@ -232,12 +699,31 @@ body:not(.editing) .drawercontent .block_dixeo_tutor > .card-body {
 }
 
 
+/* Load older messages control */
+.dixeo-tutor-load-older {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 0;
+    flex-shrink: 0;
+}
+
+.dixeo-tutor-load-older__btn {
+    text-decoration: none;
+}
+
+.dixeo-tutor-load-older__loading {
+    display: flex;
+    justify-content: center;
+    padding: 0.25rem 0;
+}
+
 /* Chat three dots loader */
 .chat-dots {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 4px;
+    margin-left: 5px;
 }
 .chat-dots span {
     width: 8px;
@@ -301,6 +787,10 @@ body:not(.editing) .drawercontent .block_dixeo_tutor > .card-body {
     pointer-events: none;
 }
 
+#dixeo-tutor-popup-container .block-header-wrapper {
+    display: none !important;
+}
+
 #dixeo-tutor-popup-container.dixeo-tutor-popup-visible {
     display: block;
 }
@@ -316,9 +806,10 @@ body:not(.editing) .drawercontent .block_dixeo_tutor > .card-body {
     right: 15px;
     bottom: 5rem;
     left: auto;
-    width: 380px;
-    max-width: calc(100vw - 2rem);
+    width: var(--dixeo-tutor-popup-width, 380px);
+    max-width: min(var(--dixeo-tutor-popup-width, 380px), calc(100vw - 2rem));
     height: calc(100% - 150px);
+    max-height: 85vh;
     margin: 0;
     z-index: 1050;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
@@ -332,12 +823,9 @@ body:not(.editing) .drawercontent .block_dixeo_tutor > .card-body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 0.75rem !important;
-    height: 100%;
-}
-
-#dixeo-tutor-popup-container > section > .card-body {
     padding: 0 !important;
+    height: 100%;
+    max-height: 85vh;
 }
 
 #dixeo-tutor-popup-container > section .card-body > .card-text {
@@ -362,6 +850,48 @@ body:not(.editing) .drawercontent .block_dixeo_tutor > .card-body {
 
 #dixeo-tutor-popup-container .card-footer {
     flex-shrink: 0;
+}
+
+.dixeo-tutor-resize-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    width: 6px;
+    margin-left: -3px;
+    cursor: col-resize;
+    touch-action: none;
+    user-select: none;
+}
+
+.dixeo-tutor-resize-handle::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 2px;
+    width: 2px;
+    border-radius: 1px;
+    background-color: transparent;
+    transition: background-color 0.15s ease;
+}
+
+.dixeo-tutor-resize-handle:hover::after,
+.dixeo-tutor-resize-handle:focus-visible::after,
+body.dixeo-tutor-resize--dragging .dixeo-tutor-resize-handle::after {
+    background-color: rgb(0 0 0 / 20%);
+}
+
+body.dixeo-tutor-resize--dragging {
+    cursor: col-resize;
+    user-select: none;
+}
+
+@media (max-width: 991px) {
+    .dixeo-tutor-resize-handle {
+        display: none;
+    }
 }
 
 /* Under 992px: modal-style backdrop on popup container; backdrop captures clicks to close. */
@@ -391,6 +921,32 @@ body:not(.editing) .drawercontent .block_dixeo_tutor > .card-body {
     #dixeo-tutor-popup-container.dixeo-tutor-popup-visible > section {
         z-index: 1035;
     }
+}
+
+/* Unread indicator on theme launcher and popup toggle */
+.dixeo-tutor-unread-anchor {
+    position: relative;
+}
+
+.dixeo-tutor-unread-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background-color: #dc3545;
+    border: 2px solid #fff;
+    box-sizing: border-box;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.dixeo-tutor-unread-badge--visible {
+    opacity: 1;
+    transform: scale(1);
 }
 
 /* Floating toggle button (popup mode) */
@@ -448,13 +1004,279 @@ body:not(.editing) .drawercontent .block_dixeo_tutor > .card-body {
     }
 }
 
-/* Footer popover relocation styles */
-.btn-footer-popover {
+/* Footer popover relocation styles (popup display mode only) */
+body:has(#dixeo-tutor-popup-container).jsenabled .btn-footer-popover {
     right: 5rem !important;
 }
 
 @media (min-width: 992px) {
-    .jsenabled #page.drawers.show-drawer-right .btn-footer-popover {
+    body:has(#dixeo-tutor-popup-container).jsenabled #page.drawers.show-drawer-right .btn-footer-popover {
         right: calc(315px + 5rem) !important;
+    }
+}
+
+/* Practice quiz review panel (replaces structured tutor message) */
+.dixeo-tutor-message--quiz-review {
+    max-width: 100%;
+    width: 100%;
+    white-space: normal;
+}
+
+.dixeo-tutor-message-row--quiz-review {
+    width: 100%;
+}
+
+.tutor-mode-selector {
+    flex-shrink: 0;
+    max-width: 11rem;
+}
+
+.tutor-mode-selector__form {
+    display: contents;
+}
+
+.tutor-mode-selector .dropdown-menu {
+    min-width: 14rem;
+}
+
+.tutor-mode-selector--locked .tutor-mode-selector__toggle {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+.dixeo-practice-quiz-review {
+    text-align: left;
+    font-size: 0.9rem;
+    line-height: 1;
+}
+
+.dixeo-practice-quiz-review * {
+    line-height: 1.2;
+}
+
+.dixeo-practice-quiz-review__header {
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dixeo-practice-quiz-review__title {
+    margin: 0 0 0.35rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.dixeo-practice-quiz-review__scores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 0.85rem;
+}
+
+.dixeo-practice-quiz-review__best-score {
+    font-weight: 600;
+    color: var(--tutor-main-color, #02aaff);
+}
+
+.dixeo-practice-quiz-review__questions {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.dixeo-practice-quiz-review__question {
+    margin: 0 0 0.75rem;
+    padding: 0.65rem 0.75rem;
+    border-radius: 0.5rem;
+    background: rgba(0, 0, 0, 0.03);
+    border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.dixeo-practice-quiz-review__question--correct {
+    border-left-color: #2e7d32;
+    background: rgba(46, 125, 50, 0.06);
+}
+
+.dixeo-practice-quiz-review__question--incorrect {
+    border-left-color: #c62828;
+    background: rgba(198, 40, 40, 0.05);
+}
+
+.dixeo-practice-quiz-review__question-head {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.35rem;
+}
+
+.dixeo-practice-quiz-review__question-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.08);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.dixeo-practice-quiz-review__status {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.dixeo-practice-quiz-review__question--correct .dixeo-practice-quiz-review__status {
+    color: #2e7d32;
+}
+
+.dixeo-practice-quiz-review__question--incorrect .dixeo-practice-quiz-review__status {
+    color: #c62828;
+}
+
+.dixeo-practice-quiz-review__question-text {
+    margin: 0 0 0.5rem;
+    font-weight: 500;
+}
+
+.dixeo-practice-quiz-review__answer-row,
+.dixeo-practice-quiz-review__feedback {
+    margin-top: 0.35rem;
+}
+
+.dixeo-practice-quiz-review__label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.55);
+    margin-bottom: 0.1rem;
+}
+
+.dixeo-practice-quiz-review__value {
+    display: block;
+}
+
+.dixeo-practice-quiz-review__feedback-body {
+    font-size: 0.85rem;
+    color: rgba(0, 0, 0, 0.75);
+}
+
+.dixeo-practice-quiz-review__feedback-body p {
+    margin: 0;
+}
+
+.dixeo-practice-quiz-review-fallback {
+    margin: 0;
+    white-space: pre-wrap;
+    font-size: 0.8rem;
+    max-height: 20rem;
+    overflow: auto;
+}
+
+.dixeo-practice-quiz-review__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Custom lesson chat card */
+.dixeo-custom-lesson-panel {
+    min-width: 14rem;
+    max-width: 100%;
+}
+
+.dixeo-custom-lesson-panel * {
+    box-sizing: border-box;
+}
+
+.dixeo-custom-lesson-panel__label {
+    margin: 0 0 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #6c757d;
+}
+
+.dixeo-custom-lesson-panel__title {
+    margin: 0 0 0.35rem;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: #212529;
+}
+
+.dixeo-custom-lesson-panel__preview {
+    margin: 0 0 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.35;
+    color: #495057;
+}
+
+.dixeo-custom-lesson-panel__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dixeo-custom-lesson-panel__tts-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: 1px solid #ced4da;
+    border-radius: 50%;
+    background: #fff;
+    color: #495057;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.dixeo-custom-lesson-panel__tts-btn:hover {
+    background: #f8f9fa;
+    border-color: #adb5bd;
+}
+
+.dixeo-custom-lesson-panel__tts-btn.playing {
+    background: #0d6efd;
+    border-color: #0d6efd;
+    color: #fff;
+}
+
+.dixeo-custom-lesson-panel__tts-icon {
+    font-size: 0.95rem;
+    line-height: 1;
+}
+
+.dixeo-custom-lesson-panel-fallback {
+    font-size: 0.875rem;
+}
+
+.dixeo-tutor-message--custom-lesson .dixeo-tutor-message-footer {
+    justify-content: flex-end;
+}
+
+.dixeo-teach-lesson__tts-btn.playing {
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+@media (max-width: 768px) {
+    #dixeo-tutor-popup-container > section {
+        max-height: 74vh;
+    }
+
+    #dixeo-tutor-popup-container > section #dixeo-tutor-messages {
+        max-height: 61vh;
     }
 }

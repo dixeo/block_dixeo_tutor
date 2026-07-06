@@ -84,3 +84,4 @@ $string['privacy:metadata:message'] = 'The content of the message sent by the us
 $string['privacy:metadata:pageurl'] = 'The URL of the page the user was on when sending the message.';
 $string['privacy:metadata:externalpurpose'] = 'User messages are sent to the Dixeo API to generate AI tutor responses based on the course content.';
 
+$string['resize_panel'] = 'Resize tutor panel';
