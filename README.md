@@ -4,7 +4,7 @@ The **Dixeo Student Tutor** is an AI-powered Moodle block that provides learers 
 
 Unlike a general-purpose chatbot, the Dixeo Student Tutor is grounded in the course knowledge base, reducing hallucinations and ensuring responses remain relevant to the course.  
 
-The tutor is available throughout the course (except on excluded activities) and can be displayed either as a floating assistant or within the Moodle block drawer.
+The tutor is available throughout the course (except on excluded activities) and can be displayed either as a floating assistant or within the Moodle block drawer. The student can use the AI tutor without ever quitting Moodle.
 
 # Features
 
