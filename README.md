@@ -1,6 +1,6 @@
 # Dixeo Student Tutor
 
-The **Dixeo Student Tutor** is an AI-powered Moodle block that provides students with a virtual tutor in the Moodle course, helping learners understand concepts, locate information, summarize resources, and receive contextual assistance throughout their learning journey. 
+The **Dixeo Student Tutor** is an AI-powered Moodle block that provides learers with a 24/7 multilingual teacher grounded in published course content, with the goal of helping learners understand concepts, locate information, summarize resources, and receive contextual assistance throughout their learning journey. 
 
 Unlike a general-purpose chatbot, the Dixeo Student Tutor is grounded in the course knowledge base, reducing hallucinations and ensuring responses remain relevant to the course.  
 
@@ -8,10 +8,10 @@ The tutor is available throughout the course (except on excluded activities) and
 
 # Features
 
-- AI tutor grounded in the content and files published by the teacher
+- Grounded in course content and files published by the teacher
 - Retrieval-Augmented Generation (RAG) using course resources
-- Multilingual conversations and automatic translation of course content
-- Persistent, individualised user conversation over the lifetime of enrolment in the course
+- Multilingual conversations with automatic translation of course content
+- Persistent, individualised user conversations over the lifetime of the course enrolment
 - Responsive user interface
 - Accessible interface (ARIA compliant)
 - Easy, per-course, teacher-controlled deployment (simply add the block to a course)
@@ -20,28 +20,26 @@ The tutor is available throughout the course (except on excluded activities) and
 
 - **Moodle:** 4.5 or later
 - **Dependency:** `local_dixeo` 4.1.0 or later and a valid Dixeo API key
-- **TinyMCE**: Must be configured as the default Moodle text editor.
 
 # Installation
 
 1. Copy `dixeo_tutor` to `/blocks/dixeo_tutor/`
 2. Visit Site Administration > Notifications
 3. Complete the Moodle upgrade.
-4. Configure the Dixeo AI platform if it has not already been configured.
+4. Make sure that Dixeo AI has been configured with a valid Dixeo API key.
 
 # Configuration
 
 The plugin provides the following administrator settings.
 
-**Display Mode** : Choose how students access the tutor.
-- **Popup** (default) - displays a floating assistant accessible from every supported course page
-- **Block Drawer** - displays the tutor as a block in the block drawer
-
-**Excluded Module Types** : Define activity modules where the tutor should not appear.
-Example: 
-```
-quiz,simplequiz2
-```
+- **Display Mode** : Choose how students access the tutor.
+ - **Popup** (default) - displays a floating assistant accessible from every supported course page
+ - **Block Drawer** - displays the tutor as a block in the block drawer
+- **Excluded Module Types** : Define activity modules where the tutor should not appear.
+ -Example: 
+  ```
+  quiz,simplequiz2
+  ```
 
 # Adding the tutor to a course
 
