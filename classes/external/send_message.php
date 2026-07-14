@@ -25,6 +25,7 @@
 
 namespace block_dixeo_tutor\external;
 
+use block_dixeo_tutor\job_ownership;
 use core_external\external_api;
 use core_external\external_function_parameters;
 use core_external\external_single_structure;
@@ -96,7 +97,12 @@ class send_message extends external_api {
                 $pagecontext
             );
 
-            return $result->to_array();
+            $payload = $result->to_array();
+            if (!empty($payload['jobid'])) {
+                job_ownership::register((int) $USER->id, (int) $params['courseid'], (string) $payload['jobid']);
+            }
+
+            return $payload;
 
         } catch (api_exception $e) {
             return response_factory::job_error($e);

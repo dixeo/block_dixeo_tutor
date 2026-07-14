@@ -41,6 +41,7 @@ $string['dixeo_tutor:talktotutor'] = 'Interagisci con il Tutor IA';
 $string['editingmode'] = 'Tutor Studente Dixeo non è disponibile in modalità di modifica.';
 $string['error_apierror'] = 'Si è verificato un problema di comunicazione con il servizio IA.';
 $string['error_check_updates'] = 'Impossibile verificare gli aggiornamenti. Per favore, aggiorna la pagina.';
+$string['error_job_access'] = 'Impossibile recuperare lo stato del lavoro.';
 $string['error_network'] = 'Si è verificato un errore di rete. Per favore, verifica la tua connessione e riprova.';
 $string['error_timeout'] = 'La richiesta è scaduta. Per favore, verifica la tua connessione e riprova.';
 $string['errorsendmessage'] = "Si è verificato un errore nell'invio del messaggio. Per favore, riprova.";

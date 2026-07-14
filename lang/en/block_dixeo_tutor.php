@@ -41,6 +41,7 @@ $string['dixeo_tutor:talktotutor'] = 'Interact with the AI Tutor';
 $string['editingmode'] = 'Dixeo Student Tutor is not available in editing mode.';
 $string['error_apierror'] = 'Sorry, there was a problem communicating with the AI service.';
 $string['error_check_updates'] = 'Unable to check for updates. Please try refreshing the page.';
+$string['error_job_access'] = 'Unable to retrieve job status.';
 $string['error_network'] = 'Network error occurred. Please check your connection and try again.';
 $string['error_timeout'] = 'Request timed out. Please check your connection and try again.';
 $string['errorsendmessage'] = 'Sorry, there was an error sending your message. Please try again.';

@@ -25,6 +25,7 @@
 
 namespace block_dixeo_tutor\external;
 
+use block_dixeo_tutor\job_ownership;
 use core_external\external_api;
 use core_external\external_function_parameters;
 use core_external\external_single_structure;
@@ -58,6 +59,8 @@ class get_job_status extends external_api {
      * @return array The job status.
      */
     public static function execute(int $courseid, string $jobid): array {
+        global $USER;
+
         $params = self::validate_parameters(self::execute_parameters(), [
             'courseid' => $courseid,
             'jobid' => $jobid,
@@ -66,6 +69,10 @@ class get_job_status extends external_api {
         $context = \context_course::instance($params['courseid']);
         self::validate_context($context);
         require_capability('block/dixeo_tutor:talktotutor', $context);
+
+        // Harden jobid and bind it to the session that issued it (defense-in-depth vs IDOR).
+        job_ownership::require_valid_jobid($params['jobid']);
+        job_ownership::require_owned((int) $USER->id, (int) $params['courseid'], $params['jobid']);
 
         try {
             $service = service_factory::get_job_service();

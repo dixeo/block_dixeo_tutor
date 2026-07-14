@@ -41,6 +41,7 @@ $string['dixeo_tutor:talktotutor'] = 'Interactuar con el Tutor de IA';
 $string['editingmode'] = 'Tutor Estudiantil Dixeo no está disponible en modo de edición.';
 $string['error_apierror'] = 'Lo sentimos, hubo un problema de comunicación con el servicio de IA.';
 $string['error_check_updates'] = 'No se pudieron verificar las actualizaciones. Por favor, actualice la página.';
+$string['error_job_access'] = 'No se pudo obtener el estado del trabajo.';
 $string['error_network'] = 'Ocurrió un error de red. Por favor, verifique su conexión e inténtelo de nuevo.';
 $string['error_timeout'] = 'La solicitud ha expirado. Por favor, verifique su conexión e inténtelo de nuevo.';
 $string['errorsendmessage'] = 'Lo sentimos, hubo un error al enviar su mensaje. Por favor, inténtelo de nuevo.';
