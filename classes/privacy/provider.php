@@ -40,7 +40,6 @@ use core_privacy\local\metadata\collection;
  * export or deletion in this plugin.
  */
 class provider implements \core_privacy\local\metadata\provider {
-
     /**
      * Describe the type of personal data stored or transmitted by this plugin.
      *

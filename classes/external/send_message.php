@@ -39,7 +39,6 @@ use local_dixeo\external\service_factory;
  * External function to submit a tutor message.
  */
 class send_message extends external_api {
-
     /**
      * Define parameters for the web service.
      *
@@ -104,7 +103,6 @@ class send_message extends external_api {
             }
 
             return client_response::sanitize_send_message($payload);
-
         } catch (api_exception $e) {
             return client_response::send_message_error($e);
         }

@@ -52,16 +52,16 @@ define([], function() {
         _processOptimisticMessage(msg, pendingTempId) {
             // Only user messages can resolve optimistic updates.
             if (pendingTempId === null || msg.role !== 'user') {
-                return { wasOptimistic: false, updatedTempId: pendingTempId };
+                return {wasOptimistic: false, updatedTempId: pendingTempId};
             }
 
             const updated = this.ui.updateMessageId(pendingTempId, msg);
             if (updated) {
                 this.state.setLastRenderedId(msg.id);
-                return { wasOptimistic: true, updatedTempId: null };
+                return {wasOptimistic: true, updatedTempId: null};
             }
 
-            return { wasOptimistic: false, updatedTempId: pendingTempId };
+            return {wasOptimistic: false, updatedTempId: pendingTempId};
         }
 
         /**
@@ -84,7 +84,9 @@ define([], function() {
          * @param {Array<object>} messages Canonical messages from server.
          */
         _updateConversationState(messages) {
-            if (!messages.length) { return; }
+            if (!messages.length) {
+                return;
+            }
 
             const lastMessage = messages[messages.length - 1];
             if (lastMessage.role === 'assistant') {

@@ -28,7 +28,6 @@ namespace block_dixeo_tutor;
  * Builds a minimized, site-local page context URL for the tutor API.
  */
 class page_context {
-
     /**
      * Allow only Moodle-site URLs; strip query/fragment; otherwise use a course URL.
      *

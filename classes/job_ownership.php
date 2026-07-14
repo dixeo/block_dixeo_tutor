@@ -31,7 +31,6 @@ namespace block_dixeo_tutor;
  * Tracks job IDs created via send_message for the current Moodle session.
  */
 class job_ownership {
-
     /** @var int How long a registered job remains valid (seconds). Aligns with client poll timeout. */
     public const TTL_SECONDS = 15 * MINSECS;
 

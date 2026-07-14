@@ -39,6 +39,7 @@ define([
                 this.strings.yourMessage = yourMsg;
                 this.strings.assistantMessage = assistantMsg;
                 this.strings.messageTooLong = tooLong;
+                return null;
             }).catch(() => {
                 // Fallback to English.
                 this.strings.senderYou = 'You';
@@ -86,11 +87,13 @@ define([
             document.body.insertBefore(skipLink, document.body.firstChild);
             str.get_string('aria_skip_to_input', 'block_dixeo_tutor').then(s => {
                 skipLink.textContent = s;
+                return null;
             }).catch(() => { /* Keep English fallback */ });
 
             // Pre-fetch "Today" label to prevent race conditions when the first message arrives.
             str.get_string('today', 'moodle').then(label => {
                 this.todayLabel = label;
+                return null;
             }).catch(() => {
                 this.todayLabel = 'Today';
             });
@@ -102,7 +105,7 @@ define([
                 this._validateInputLength();
             });
             this._boundScrollHandler = () => this._onMessagesScroll();
-            this.dom.messagesContainer.addEventListener('scroll', this._boundScrollHandler, { passive: true });
+            this.dom.messagesContainer.addEventListener('scroll', this._boundScrollHandler, {passive: true});
             this._adjustTextareaHeight();
         }
 
@@ -204,7 +207,7 @@ define([
             const timeElm = node.querySelector('.message-time');
             if (timeElm) {
                 timeElm.textContent = new Date((msg.time || 0) * 1000)
-                    .toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    .toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
             }
             return true;
         }
@@ -267,7 +270,7 @@ define([
                     }
                 }
 
-                messages.push({ id, role });
+                messages.push({id, role});
             });
 
             return messages;
@@ -312,6 +315,7 @@ define([
                             this._appendDateSeparator(label);
                             this.todaySeparatorAdded = true;
                         }
+                        return null;
                     }).catch(() => {
                         if (!this.todaySeparatorAdded) {
                             this._appendDateSeparator('Today');
@@ -455,7 +459,7 @@ define([
                 doScroll();
                 const lastChild = el.lastElementChild;
                 if (lastChild) {
-                    lastChild.scrollIntoView({ block: 'end', behavior: 'instant' });
+                    lastChild.scrollIntoView({block: 'end', behavior: 'instant'});
                 } else {
                     doScroll();
                 }

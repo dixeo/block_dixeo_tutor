@@ -14,7 +14,7 @@ define([
      * @param {object} args The arguments for the API method.
      * @param {object} options Additional options for the AJAX call.
      */
-    const callAjax = async (methodname, args, options = {}) => {
+    const callAjax = async(methodname, args, options = {}) => {
         const defaultOptions = {
             timeout: constants.network.AJAX_TIMEOUT,
             retries: 0,
@@ -22,8 +22,8 @@ define([
             retryDelay: constants.network.RETRY_DELAY,
         };
 
-        const finalOptions = { ...defaultOptions, ...options };
-        const { retries, maxRetries, retryDelay, ...ajaxOptions } = finalOptions;
+        const finalOptions = {...defaultOptions, ...options};
+        const {retries, maxRetries, retryDelay, ...ajaxOptions} = finalOptions;
 
         try {
             const request = {
@@ -38,7 +38,7 @@ define([
                 throw new errors.APIError(
                     result.message || 'API request failed',
                     result.errorcode || 'UNKNOWN',
-                    { methodname, args }
+                    {methodname, args}
                 );
             }
 
@@ -58,7 +58,7 @@ define([
                 throw new errors.TimeoutError(
                     `Request timed out after ${ajaxOptions.timeout}ms`,
                     ajaxOptions.timeout,
-                    { methodname, args }
+                    {methodname, args}
                 );
             }
 
@@ -68,7 +68,7 @@ define([
 
             throw new errors.NetworkError(
                 error.message || 'Unknown network error',
-                { originalError: error, methodname, args }
+                {originalError: error, methodname, args}
             );
         }
     };
@@ -87,11 +87,11 @@ define([
                 throw new errors.ValidationError(
                     'Invalid course ID',
                     'courseid',
-                    { courseid }
+                    {courseid}
                 );
             }
 
-            const args = { courseid };
+            const args = {courseid};
             if (sinceid) {
                 args.sinceid = sinceid;
             }
@@ -103,7 +103,7 @@ define([
                     throw new errors.APIError(
                         'Invalid conversation response format',
                         'INVALID_RESPONSE',
-                        { result }
+                        {result}
                     );
                 }
 
@@ -129,19 +129,19 @@ define([
                 throw new errors.ValidationError(
                     'Invalid course ID',
                     'courseid',
-                    { courseid }
+                    {courseid}
                 );
             }
             if (!jobId) {
                 throw new errors.ValidationError(
                     'Invalid job ID',
                     'jobId',
-                    { jobId }
+                    {jobId}
                 );
             }
 
             try {
-                return await callAjax('get_job_status', { courseid: courseid, jobid: jobId });
+                return await callAjax('get_job_status', {courseid: courseid, jobid: jobId});
             } catch (error) {
                 log.error('Failed to poll job status', {
                     error: error.message,
@@ -164,7 +164,7 @@ define([
                 throw new errors.ValidationError(
                     'Invalid course ID',
                     'courseid',
-                    { courseid }
+                    {courseid}
                 );
             }
 
@@ -172,15 +172,15 @@ define([
                 throw new errors.ValidationError(
                     'Message cannot be empty',
                     'message',
-                    { message }
+                    {message}
                 );
             }
 
             try {
                 const result = await callAjax(
                     'send_message',
-                    { courseid, message: message.trim(), pageurl },
-                    { timeout: constants.network.AJAX_TIMEOUT }
+                    {courseid, message: message.trim(), pageurl},
+                    {timeout: constants.network.AJAX_TIMEOUT}
                 );
 
                 // Validate response — new API returns {completed, job_id, status}.
@@ -188,7 +188,7 @@ define([
                     throw new errors.APIError(
                         'Invalid send message response',
                         'INVALID_RESPONSE',
-                        { result }
+                        {result}
                     );
                 }
 

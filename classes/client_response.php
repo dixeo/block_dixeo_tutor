@@ -30,7 +30,6 @@ use local_dixeo\api\exception\api_exception;
  * Maps verbose API errors to controlled client-facing messages.
  */
 class client_response {
-
     /**
      * Generic user-visible tutor error string.
      *

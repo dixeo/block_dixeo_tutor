@@ -205,7 +205,7 @@ define([
             // 1. Create an optimistic bubble with a negative temp ID.
             const tempId = --this.tempIdCounter;
             const timestamp = Math.floor(Date.now() / 1000);
-            this.ui.appendMessage({ id: tempId, role: 'user', content: message, time: timestamp });
+            this.ui.appendMessage({id: tempId, role: 'user', content: message, time: timestamp});
 
             this.pendingTempId = tempId;
             this.state.setDraft(message);
@@ -281,7 +281,7 @@ define([
                 }
             }
 
-            this.replyPollTimeoutId = setTimeout(async () => {
+            this.replyPollTimeoutId = setTimeout(async() => {
                 if (!navigator.onLine) {
                     this._handleConnectionLoss();
                     return;
@@ -333,6 +333,9 @@ define([
                         this.ui.enableInput();
                         str.get_string('unknownerror', 'block_dixeo_tutor').then(msg => {
                             this.ui.appendErrorMessage(msg);
+                            return null;
+                        }).catch(() => {
+                            // Ignore string load failures.
                         });
                     }
                 }
@@ -360,7 +363,7 @@ define([
                 }
             }
 
-            this.replyPollTimeoutId = setTimeout(async () => {
+            this.replyPollTimeoutId = setTimeout(async() => {
                 if (!navigator.onLine) {
                     this._handleConnectionLoss();
                     return;
@@ -402,6 +405,9 @@ define([
                         this.ui.enableInput();
                         str.get_string('unknownerror', 'block_dixeo_tutor').then(msg => {
                             this.ui.appendErrorMessage(msg);
+                            return null;
+                        }).catch(() => {
+                            // Ignore string load failures.
                         });
                     }
                 }
@@ -558,7 +564,7 @@ define([
                 </div>`.trim();
             const timeoutNode = wrapper.firstChild;
 
-            timeoutNode.querySelector('button').addEventListener('click', async () => {
+            timeoutNode.querySelector('button').addEventListener('click', async() => {
                 timeoutNode.remove();
 
                 try {
@@ -610,7 +616,7 @@ define([
         _startConnectionRetry() {
             this._clearConnectionRetry();
 
-            this.connectionRetryTimeoutId = setTimeout(async () => {
+            this.connectionRetryTimeoutId = setTimeout(async() => {
                 if (!navigator.onLine) {
                     this.connectionRetryDelay = Math.min(
                         this.connectionRetryDelay * constants.polling.BACKOFF_FACTOR,

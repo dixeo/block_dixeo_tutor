@@ -38,7 +38,6 @@ use local_dixeo\external\service_factory;
  * External function to get tutor job status.
  */
 class get_job_status extends external_api {
-
     /**
      * Define parameters for the web service.
      *
@@ -79,7 +78,6 @@ class get_job_status extends external_api {
             $status = $service->get_job_status($params['jobid']);
 
             return client_response::sanitize_job_status($status->to_array());
-
         } catch (api_exception $e) {
             return client_response::job_status_error($params['jobid'], $e);
         }
