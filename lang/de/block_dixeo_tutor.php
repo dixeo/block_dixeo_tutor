@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -26,62 +25,49 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname']  = 'Dixeo Student Tutor';
-$string['editingmode'] = 'Dixeo Student Tutor ist im Bearbeitungsmodus nicht verfügbar.';
-$string['quizrestriction'] = 'Dixeo Student Tutor ist auf Quiz-Seiten nicht verfügbar.';
-$string['filecountlimit'] = 'Der KI-Tutor ist auf 150 Dateien pro Kurs beschränkt (derzeit {$a} Dateien). Bitte reduzieren Sie bei Bedarf die Anzahl der Dateien.';
-$string['notenrolled'] = 'Sie müssen in diesen Kurs eingeschrieben sein, um den Tutor zu nutzen.';
-$string['errorsendmessage'] = 'Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.';
-$string['error_apierror'] = 'Bei der Kommunikation mit dem KI-Dienst ist ein Problem aufgetreten.';
-$string['unknownerror'] = 'Ein unbekannter Fehler ist aufgetreten.';
-$string['talktotutor'] = 'Mit dem Tutor sprechen';
-
-// Weitere UI-Strings.
-$string['assistanttitle'] = 'Fragen Sie Ed';
-$string['tutorpresentation'] = 'Hallo! Ich bin Ed, Ihr KI-Tutor. Wie kann ich Ihnen bei diesem Kurs helfen?';
-$string['placeholder'] = 'Nachricht eingeben...';
-$string['send'] = 'Senden';
-$string['retry'] = 'Erneut versuchen';
-
-// Timeout- und Fehlerbehandlungs-Strings.
-$string['timeout_message'] = 'Die Antwort dauert länger als erwartet. Der Assistent arbeitet möglicherweise noch an Ihrer Anfrage.';
-$string['check_for_updates'] = 'Auf Updates prüfen';
-$string['error_check_updates'] = 'Updates konnten nicht geprüft werden. Bitte laden Sie die Seite neu.';
-$string['error_timeout'] = 'Zeitüberschreitung der Anfrage. Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.';
-$string['error_network'] = 'Netzwerkfehler. Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.';
-
-$string['connection_lost'] = 'Verbindung verloren. Verbindung wird wiederhergestellt...';
-$string['yesterday'] = 'gestern';
-
-// Barrierefreiheits-Strings.
-$string['aria_chat_messages'] = 'Chat-Nachrichten';
-$string['aria_type_message'] = 'Nachricht eingeben';
-$string['aria_send_message'] = 'Nachricht senden';
-$string['aria_skip_to_input'] = 'Zum Nachrichteneingabefeld springen';
-$string['aria_your_message'] = 'Ihre Nachricht';
 $string['aria_assistant_message'] = 'Assistenten-Nachricht';
-$string['aria_sender_you'] = 'Sie';
+$string['aria_chat_messages'] = 'Chat-Nachrichten';
+$string['aria_send_message'] = 'Nachricht senden';
 $string['aria_sender_assistant'] = 'Assistent';
-$string['message_too_long'] = 'Die Nachricht darf maximal {$a} Zeichen enthalten.';
-
+$string['aria_sender_you'] = 'Sie';
+$string['aria_skip_to_input'] = 'Zum Nachrichteneingabefeld springen';
+$string['aria_type_message'] = 'Nachricht eingeben';
+$string['aria_your_message'] = 'Ihre Nachricht';
+$string['assistanttitle'] = 'Fragen Sie Ed';
+$string['check_for_updates'] = 'Auf Updates prüfen';
+$string['connection_lost'] = 'Verbindung verloren. Verbindung wird wiederhergestellt...';
 $string['dixeo_tutor:addinstance'] = 'Einen neuen Dixeo Student Tutor-Block hinzufügen';
 $string['dixeo_tutor:talktotutor'] = 'Mit dem KI-Tutor interagieren';
-
-// Einstellungen.
+$string['editingmode'] = 'Dixeo Student Tutor ist im Bearbeitungsmodus nicht verfügbar.';
+$string['error_apierror'] = 'Bei der Kommunikation mit dem KI-Dienst ist ein Problem aufgetreten.';
+$string['error_check_updates'] = 'Updates konnten nicht geprüft werden. Bitte laden Sie die Seite neu.';
+$string['error_network'] = 'Netzwerkfehler. Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.';
+$string['error_timeout'] = 'Zeitüberschreitung der Anfrage. Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.';
+$string['errorsendmessage'] = 'Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.';
+$string['filecountlimit'] = 'Der KI-Tutor ist auf 150 Dateien pro Kurs beschränkt (derzeit {$a} Dateien). Bitte reduzieren Sie bei Bedarf die Anzahl der Dateien.';
+$string['message_too_long'] = 'Die Nachricht darf maximal {$a} Zeichen enthalten.';
+$string['notenrolled'] = 'Sie müssen in diesen Kurs eingeschrieben sein, um den Tutor zu nutzen.';
+$string['placeholder'] = 'Nachricht eingeben...';
+$string['pluginname'] = 'Dixeo Student Tutor';
+$string['privacy:metadata:courseid'] = 'Die ID des Kurses, in dem der Benutzer eingeschrieben ist.';
+$string['privacy:metadata:externalpurpose'] = 'Benutzernachrichten werden an die Dixeo-API gesendet, um KI-Tutor-Antworten basierend auf dem Kursinhalt zu erzeugen.';
+$string['privacy:metadata:message'] = 'Der Inhalt der vom Benutzer gesendeten Nachricht.';
+$string['privacy:metadata:pageurl'] = 'Die URL der Seite, auf der sich der Benutzer beim Senden der Nachricht befand.';
+$string['privacy:metadata:userid'] = 'Die ID des Benutzers, der die Nachricht sendet.';
+$string['quizrestriction'] = 'Dixeo Student Tutor ist auf Quiz-Seiten nicht verfügbar.';
+$string['resize_panel'] = 'Größe des Tutor-Panels ändern';
+$string['retry'] = 'Erneut versuchen';
+$string['send'] = 'Senden';
 $string['setting_displaymode'] = 'Anzeigemodus';
 $string['setting_displaymode_desc'] = 'Tutor im Block-Schublade (Seitenpanel) oder in einem schwebenden Popup-Fenster per Button anzeigen.';
 $string['setting_displaymode_drawer'] = 'In der Block-Schublade';
 $string['setting_displaymode_popup'] = 'In einem Popup-Fenster';
-$string['tooltip_open_tutor'] = 'Frag Ed';
-$string['tooltip_hide_tutor'] = 'Ed schließen';
 $string['setting_excludedmodules'] = 'Ausgeschlossene Modultypen';
 $string['setting_excludedmodules_desc'] = 'Kommagetrennte Liste von Aktivitätsmodultypen, auf deren Seiten der Tutor ausgeblendet werden soll (z. B. quiz, simplequiz2). Der Tutor erscheint nicht auf den Seiten dieser Aktivitätstypen.';
-
-// Datenschutz.
-$string['privacy:metadata:userid'] = 'Die ID des Benutzers, der die Nachricht sendet.';
-$string['privacy:metadata:courseid'] = 'Die ID des Kurses, in dem der Benutzer eingeschrieben ist.';
-$string['privacy:metadata:message'] = 'Der Inhalt der vom Benutzer gesendeten Nachricht.';
-$string['privacy:metadata:pageurl'] = 'Die URL der Seite, auf der sich der Benutzer beim Senden der Nachricht befand.';
-$string['privacy:metadata:externalpurpose'] = 'Benutzernachrichten werden an die Dixeo-API gesendet, um KI-Tutor-Antworten basierend auf dem Kursinhalt zu erzeugen.';
-
-$string['resize_panel'] = 'Größe des Tutor-Panels ändern';
+$string['talktotutor'] = 'Mit dem Tutor sprechen';
+$string['timeout_message'] = 'Die Antwort dauert länger als erwartet. Der Assistent arbeitet möglicherweise noch an Ihrer Anfrage.';
+$string['tooltip_hide_tutor'] = 'Ed schließen';
+$string['tooltip_open_tutor'] = 'Frag Ed';
+$string['tutorpresentation'] = 'Hallo! Ich bin Ed, Ihr KI-Tutor. Wie kann ich Ihnen bei diesem Kurs helfen?';
+$string['unknownerror'] = 'Ein unbekannter Fehler ist aufgetreten.';
+$string['yesterday'] = 'gestern';

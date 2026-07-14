@@ -58,6 +58,7 @@ class send_message extends external_api {
      *
      * @param int $courseid The course ID.
      * @param string $message The user message.
+     * @param string $pageurl The current page URL.
      * @return array The pending operation result with job_id.
      */
     public static function execute(int $courseid, string $message, string $pageurl = ''): array {

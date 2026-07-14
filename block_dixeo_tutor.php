@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -24,8 +23,9 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
+/**
+ * Dixeo Student Tutor block class.
+ */
 class block_dixeo_tutor extends block_base {
     /**
      * Returns the list of module types where the tutor should not be displayed.
@@ -102,7 +102,7 @@ class block_dixeo_tutor extends block_base {
      * @return stdClass The block content object with text and footer properties
      */
     public function get_content(): \stdClass {
-        global $PAGE, $USER, $OUTPUT;
+        global $USER, $OUTPUT;
 
         // Return cached content if already generated.
         if ($this->content !== null) {
@@ -113,7 +113,7 @@ class block_dixeo_tutor extends block_base {
         $this->content = (object)[];
         $this->content->text = '';
         $this->content->footer = '';
-        $courseid = $PAGE->course->id;
+        $courseid = $this->page->course->id;
 
         // Check if user has permission to use the tutor.
         if (!has_capability('block/dixeo_tutor:talktotutor', \context_course::instance($courseid))) {
@@ -122,12 +122,12 @@ class block_dixeo_tutor extends block_base {
         }
 
         // Hide tutor on excluded module pages.
-        if (self::is_current_page_excluded($PAGE)) {
+        if (self::is_current_page_excluded($this->page)) {
             return $this->content;
         }
 
         // Do not display the block if the user is in editing mode.
-        if ($PAGE->user_is_editing()) {
+        if ($this->page->user_is_editing()) {
             $this->content->text = get_string('editingmode', 'block_dixeo_tutor');
             return $this->content;
         }
@@ -142,17 +142,17 @@ class block_dixeo_tutor extends block_base {
             $displaymode = 'popup';
         }
         // Theme Dixeo always presents the tutor in drawer mode.
-        if ($PAGE->theme->name === 'dixeo') {
+        if ($this->page->theme->name === 'dixeo') {
             $displaymode = 'drawer';
         }
-        $openTooltip = get_string('tooltip_open_tutor', 'block_dixeo_tutor');
-        $hideTooltip = get_string('tooltip_hide_tutor', 'block_dixeo_tutor');
+        $opentooltip = get_string('tooltip_open_tutor', 'block_dixeo_tutor');
+        $hidetooltip = get_string('tooltip_hide_tutor', 'block_dixeo_tutor');
         $this->page->requires->js_call_amd('block_dixeo_tutor/tutor', 'init', [
             $courseid,
             $USER->id,
             $displaymode,
-            $openTooltip,
-            $hideTooltip
+            $opentooltip,
+            $hidetooltip,
         ]);
         return $this->content;
     }
@@ -199,8 +199,7 @@ class block_dixeo_tutor extends block_base {
      * @return bool True to hide the block header
      */
     public function hide_header(): bool {
-        global $PAGE;
-        return !$PAGE->user_is_editing();
+        return !$this->page->user_is_editing();
     }
 
     /**
