@@ -110,8 +110,6 @@ define([
                 return result;
             } catch (error) {
                 log.error('Failed to load conversation', {
-                    courseid,
-                    sinceid,
                     error: error.message,
                     code: error.code
                 });
@@ -146,7 +144,6 @@ define([
                 return await callAjax('get_job_status', { courseid: courseid, jobid: jobId });
             } catch (error) {
                 log.error('Failed to poll job status', {
-                    jobId,
                     error: error.message,
                     code: error.code
                 });
@@ -198,7 +195,6 @@ define([
                 return result;
             } catch (error) {
                 log.error('Failed to send message', {
-                    courseid,
                     messageLength: message.length,
                     error: error.message,
                     code: error.code

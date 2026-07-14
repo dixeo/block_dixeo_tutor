@@ -25,13 +25,13 @@
 
 namespace block_dixeo_tutor\external;
 
+use block_dixeo_tutor\client_response;
 use block_dixeo_tutor\job_ownership;
 use core_external\external_api;
 use core_external\external_function_parameters;
 use core_external\external_single_structure;
 use core_external\external_value;
 use local_dixeo\api\exception\api_exception;
-use local_dixeo\external\response_factory;
 use local_dixeo\external\service_factory;
 
 /**
@@ -78,10 +78,10 @@ class get_job_status extends external_api {
             $service = service_factory::get_job_service();
             $status = $service->get_job_status($params['jobid']);
 
-            return $status->to_array();
+            return client_response::sanitize_job_status($status->to_array());
 
         } catch (api_exception $e) {
-            return response_factory::job_status_error($params['jobid'], $e);
+            return client_response::job_status_error($params['jobid'], $e);
         }
     }
 
@@ -104,13 +104,12 @@ class get_job_status extends external_api {
             ], 'Result data', VALUE_OPTIONAL),
             'creditsused' => new external_value(PARAM_INT, 'Credits consumed', VALUE_OPTIONAL),
             'error' => new external_single_structure([
-                'type' => new external_value(PARAM_RAW, 'Error type', VALUE_OPTIONAL),
-                'title' => new external_value(PARAM_RAW, 'Error title', VALUE_OPTIONAL),
+                'type' => new external_value(PARAM_ALPHANUMEXT, 'Error type', VALUE_OPTIONAL),
+                'title' => new external_value(PARAM_TEXT, 'Error title', VALUE_OPTIONAL),
                 'status' => new external_value(PARAM_INT, 'HTTP status code', VALUE_OPTIONAL),
-                'detail' => new external_value(PARAM_RAW, 'Error detail', VALUE_OPTIONAL),
-            ], 'Error details (RFC 7807)', VALUE_OPTIONAL),
+                'detail' => new external_value(PARAM_TEXT, 'Error detail', VALUE_OPTIONAL),
+            ], 'Error details (sanitized for clients)', VALUE_OPTIONAL),
             'processingtimeseconds' => new external_value(PARAM_FLOAT, 'Processing time', VALUE_OPTIONAL),
-            'namespace' => new external_value(PARAM_RAW, 'Job namespace', VALUE_OPTIONAL),
         ]);
     }
 }

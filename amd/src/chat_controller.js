@@ -226,7 +226,8 @@ define([
                 if (response.errormessage) {
                     this.state.setPending(false);
                     this.ui.enableInput();
-                    this.ui.appendErrorMessage(response.errormessage);
+                    const errorMsg = await str.get_string('error_apierror', 'block_dixeo_tutor');
+                    this.ui.appendErrorMessage(errorMsg);
                     return;
                 }
 
