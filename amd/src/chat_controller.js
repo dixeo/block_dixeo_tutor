@@ -112,8 +112,9 @@ define([
         }
 
         /**
-         * Binds localStorage events for cross-tab synchronization.
+         * Binds localStorage events for cross-tab poll synchronization.
          * The 'storage' event fires only in OTHER tabs when localStorage changes.
+         * Draft text is never stored in localStorage (memory only).
          * @private
          */
         _bindStorageEvents() {
@@ -446,7 +447,7 @@ define([
         }
 
         /**
-         * Restores local session state including drafts and polling.
+         * Restores same-tab session state: in-memory draft (if any) and poll checkpoint.
          * @private
          */
         _restoreSession() {
@@ -688,6 +689,7 @@ define([
             this._onOffline = null;
             this._onOnline = null;
             this._onBeforeUnload = null;
+            this._onStorageChange = null;
         }
     };
 });
