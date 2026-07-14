@@ -26,6 +26,7 @@
 namespace block_dixeo_tutor\external;
 
 use block_dixeo_tutor\job_ownership;
+use block_dixeo_tutor\page_context;
 use core_external\external_api;
 use core_external\external_function_parameters;
 use core_external\external_single_structure;
@@ -85,8 +86,8 @@ class send_message extends external_api {
         }
         $params['message'] = $message;
 
-        // Use the page URL sent by the client as page context.
-        $pagecontext = !empty($params['pageurl']) ? $params['pageurl'] : '';
+        // Restrict page context to this Moodle site and drop query/fragment; never trust raw client URLs.
+        $pagecontext = page_context::sanitize_pageurl($params['pageurl'] ?? '', (int) $params['courseid']);
 
         try {
             $service = service_factory::get_tutor_service();
