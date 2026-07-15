@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -26,62 +25,51 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname']  = 'Tutor Dixeo para Estudantes';
-$string['editingmode'] = 'O Tutor Dixeo não está disponível no modo de edição.';
-$string['quizrestriction'] = 'O Tutor Dixeo não está disponível nas páginas de questionários.';
-$string['filecountlimit'] = 'O tutor de IA está limitado a 150 ficheiros por disciplina (atualmente {$a} ficheiros). Por favor, reduza o número de ficheiros se necessário.';
-$string['notenrolled'] = 'Tem de estar inscrito nesta disciplina para usar o tutor.';
-$string['errorsendmessage'] = 'Ocorreu um erro ao enviar a sua mensagem. Por favor, tente novamente.';
-$string['error_apierror'] = 'Ocorreu um problema na comunicação com o serviço de IA.';
-$string['unknownerror'] = 'Ocorreu um erro desconhecido.';
-$string['talktotutor'] = 'Falar com o tutor';
-
-// Outras strings da interface.
-$string['assistanttitle'] = 'Pergunte ao Ed';
-$string['tutorpresentation'] = 'Olá! Sou o Ed, o teu tutor de IA. Como posso ajudar-te nesta disciplina?';
-$string['placeholder'] = 'Escreva a sua mensagem...';
-$string['send'] = 'Enviar';
-$string['retry'] = 'Tentar novamente';
-
-// Strings de timeout e tratamento de erros.
-$string['timeout_message'] = 'A resposta está a demorar mais do que o esperado. O assistente pode ainda estar a processar o seu pedido.';
-$string['check_for_updates'] = 'Verificar atualizações';
-$string['error_check_updates'] = 'Não foi possível verificar atualizações. Por favor, atualize a página.';
-$string['error_timeout'] = 'O pedido expirou. Por favor, verifique a sua ligação e tente novamente.';
-$string['error_network'] = 'Ocorreu um erro de rede. Por favor, verifique a sua ligação e tente novamente.';
-
-$string['connection_lost'] = 'Ligação perdida. A tentar reconectar...';
-$string['yesterday'] = 'ontem';
-
-// Strings de acessibilidade.
-$string['aria_chat_messages'] = 'Mensagens do chat';
-$string['aria_type_message'] = 'Escreva a sua mensagem';
-$string['aria_send_message'] = 'Enviar mensagem';
-$string['aria_skip_to_input'] = 'Ir para o campo de mensagem';
-$string['aria_your_message'] = 'A sua mensagem';
 $string['aria_assistant_message'] = 'Mensagem do assistente';
-$string['aria_sender_you'] = 'Você';
+$string['aria_chat_messages'] = 'Mensagens do chat';
+$string['aria_send_message'] = 'Enviar mensagem';
 $string['aria_sender_assistant'] = 'Assistente';
-$string['message_too_long'] = 'A mensagem não pode exceder {$a} caracteres.';
-
+$string['aria_sender_you'] = 'Você';
+$string['aria_skip_to_input'] = 'Ir para o campo de mensagem';
+$string['aria_type_message'] = 'Escreva a sua mensagem';
+$string['aria_your_message'] = 'A sua mensagem';
+$string['assistanttitle'] = 'Pergunte ao Ed';
+$string['check_for_updates'] = 'Verificar atualizações';
+$string['connection_lost'] = 'Ligação perdida. A tentar reconectar...';
 $string['dixeo_tutor:addinstance'] = 'Adicionar um novo bloco Tutor Dixeo para Estudantes';
 $string['dixeo_tutor:talktotutor'] = 'Interagir com o Tutor de IA';
-
-// Definições.
+$string['editingmode'] = 'O Tutor Dixeo não está disponível no modo de edição.';
+$string['error_apierror'] = 'Ocorreu um problema na comunicação com o serviço de IA.';
+$string['error_check_updates'] = 'Não foi possível verificar atualizações. Por favor, atualize a página.';
+$string['error_job_access'] = 'Não foi possível obter o estado do trabalho.';
+$string['error_network'] = 'Ocorreu um erro de rede. Por favor, verifique a sua ligação e tente novamente.';
+$string['error_timeout'] = 'O pedido expirou. Por favor, verifique a sua ligação e tente novamente.';
+$string['errorsendmessage'] = 'Ocorreu um erro ao enviar a sua mensagem. Por favor, tente novamente.';
+$string['filecountlimit'] = 'O tutor de IA está limitado a 150 ficheiros por disciplina (atualmente {$a} ficheiros). Por favor, reduza o número de ficheiros se necessário.';
+$string['message_too_long'] = 'A mensagem não pode exceder {$a} caracteres.';
+$string['notenrolled'] = 'Tem de estar inscrito nesta disciplina para usar o tutor.';
+$string['placeholder'] = 'Escreva a sua mensagem...';
+$string['pluginname'] = 'Tutor Dixeo para Estudantes';
+$string['privacy:metadata'] = 'O bloco Dixeo Student Tutor não armazena dados pessoais na base de dados Moodle. As conversas do tutor são processadas pelo local_dixeo e transferidas para a API Dixeo. A retenção, exportação e eliminação dessas conversas regem-se pelo local_dixeo e pelo acordo do site com o serviço Dixeo, não por este bloco.';
+$string['privacy:metadata:courseid'] = 'O ID da disciplina em que o utilizador está inscrito.';
+$string['privacy:metadata:externalpurpose'] = 'As mensagens do utilizador, o contexto da disciplina e um caminho de página minimizado do site são enviados para a API Dixeo (via local_dixeo) para gerar respostas do tutor de IA. Este bloco não armazena conversas localmente e, por isso, não exporta nem elimina esses dados; esses controlos devem ser fornecidos pelo local_dixeo e pelo contrato da API Dixeo.';
+$string['privacy:metadata:message'] = 'O conteúdo da mensagem enviada pelo utilizador.';
+$string['privacy:metadata:pageurl'] = 'Um caminho de URL do site Moodle como contexto de página ao enviar a mensagem (restrito a este site; strings de consulta e fragmentos são removidos).';
+$string['privacy:metadata:userid'] = 'O ID do utilizador que envia a mensagem.';
+$string['quizrestriction'] = 'O Tutor Dixeo não está disponível nas páginas de questionários.';
+$string['resize_panel'] = 'Redimensionar painel do tutor';
+$string['retry'] = 'Tentar novamente';
+$string['send'] = 'Enviar';
 $string['setting_displaymode'] = 'Modo de exibição';
 $string['setting_displaymode_desc'] = 'Mostrar o tutor na gaveta de blocos (painel lateral) ou numa janela flutuante aberta por um botão.';
 $string['setting_displaymode_drawer'] = 'Na gaveta de blocos';
 $string['setting_displaymode_popup'] = 'Numa janela flutuante';
-$string['tooltip_open_tutor'] = 'Perguntar ao Ed';
-$string['tooltip_hide_tutor'] = 'Fechar Ed';
 $string['setting_excludedmodules'] = 'Tipos de módulos excluídos';
 $string['setting_excludedmodules_desc'] = 'Lista separada por vírgulas dos tipos de módulos de atividade onde o tutor deve ser ocultado (ex.: quiz, simplequiz2). O tutor não aparecerá nas páginas destes tipos de atividade.';
-
-// Privacidade.
-$string['privacy:metadata:userid'] = 'O ID do utilizador que envia a mensagem.';
-$string['privacy:metadata:courseid'] = 'O ID da disciplina em que o utilizador está inscrito.';
-$string['privacy:metadata:message'] = 'O conteúdo da mensagem enviada pelo utilizador.';
-$string['privacy:metadata:pageurl'] = 'O URL da página em que o utilizador estava ao enviar a mensagem.';
-$string['privacy:metadata:externalpurpose'] = 'As mensagens dos utilizadores são enviadas para a API Dixeo para gerar respostas do tutor de IA com base no conteúdo da disciplina.';
-
-$string['resize_panel'] = 'Redimensionar painel do tutor';
+$string['talktotutor'] = 'Falar com o tutor';
+$string['timeout_message'] = 'A resposta está a demorar mais do que o esperado. O assistente pode ainda estar a processar o seu pedido.';
+$string['tooltip_hide_tutor'] = 'Fechar Ed';
+$string['tooltip_open_tutor'] = 'Perguntar ao Ed';
+$string['tutorpresentation'] = 'Olá! Sou o Ed, o teu tutor de IA. Como posso ajudar-te nesta disciplina?';
+$string['unknownerror'] = 'Ocorreu um erro desconhecido.';
+$string['yesterday'] = 'ontem';

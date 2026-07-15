@@ -44,7 +44,9 @@ define([], function() {
          * @private
          */
         _stripMarkdownSyntax: function(text) {
-            if (!text) { return ''; }
+            if (!text) {
+                return '';
+            }
 
             let processedText = text;
             processedText = processedText.replace(/^(#{1,6})\s+(.+)$/gm, '$2');
@@ -62,7 +64,9 @@ define([], function() {
          * @private
          */
         _processSimpleMarkdown: function(text, escapeHtml = false) {
-            if (!text) { return ''; }
+            if (!text) {
+                return '';
+            }
 
             let processedText = escapeHtml ? this.escapeHtml(text) : text;
             processedText = processedText

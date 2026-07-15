@@ -211,6 +211,7 @@ define([
         str.get_string('resize_panel', 'block_dixeo_tutor').then(function(label) {
             ariaLabel = label;
             handle.setAttribute('aria-label', label);
+            return null;
         }).catch(function() {
             // Keep default English fallback.
         });

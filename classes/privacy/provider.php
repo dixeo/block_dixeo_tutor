@@ -17,8 +17,10 @@
 /**
  * Privacy provider for the Dixeo Tutor block.
  *
- * Declares external data sent to the Dixeo API. No personal data
- * is stored locally in Moodle by this plugin.
+ * Declares personal data transferred to the Dixeo API via local_dixeo.
+ * This block does not create its own database tables or Moodle file areas.
+ * Conversation retention, export, and deletion are therefore not performed
+ * here; they depend on local_dixeo and the site's Dixeo API agreement.
  *
  * @package    block_dixeo_tutor
  * @copyright  2025 Edunao SAS (contact@edunao.com)
@@ -33,11 +35,11 @@ use core_privacy\local\metadata\collection;
 /**
  * Privacy metadata provider for block_dixeo_tutor.
  *
- * This plugin sends user data to an external Dixeo API service
- * but does not store any personal data locally in the Moodle database.
+ * Personal data is processed transiently and forwarded to the Dixeo API
+ * through local_dixeo. There is no local store for Moodle Privacy API
+ * export or deletion in this plugin.
  */
 class provider implements \core_privacy\local\metadata\provider {
-
     /**
      * Describe the type of personal data stored or transmitted by this plugin.
      *

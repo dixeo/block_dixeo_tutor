@@ -39,7 +39,7 @@ define([], function() {
      */
     class APIError extends TutorError {
         constructor(message, statusCode, details = {}) {
-            super(message, 'API_ERROR', { ...details, statusCode });
+            super(message, 'API_ERROR', {...details, statusCode});
             this.statusCode = statusCode;
         }
     }
@@ -49,7 +49,7 @@ define([], function() {
      */
     class ValidationError extends TutorError {
         constructor(message, field, details = {}) {
-            super(message, 'VALIDATION_ERROR', { ...details, field });
+            super(message, 'VALIDATION_ERROR', {...details, field});
             this.field = field;
         }
     }
@@ -59,7 +59,7 @@ define([], function() {
      */
     class TimeoutError extends TutorError {
         constructor(message, timeout, details = {}) {
-            super(message, 'TIMEOUT_ERROR', { ...details, timeout });
+            super(message, 'TIMEOUT_ERROR', {...details, timeout});
             this.timeout = timeout;
         }
     }

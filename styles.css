@@ -1,3 +1,4 @@
+/* stylelint-disable declaration-no-important -- overrides Boost/drawer/card and shared footer defaults */
 #dixeo-tutor {
     --tutor-main-color: var(--primary, #02aaff);
     --tutor-text-color: #fff;
@@ -58,7 +59,7 @@
 
 .dixeo-tutor-quiz-pane {
     flex: 0 0 auto;
-    max-height: min(60vh, 100%);
+    max-height: 60vh;
     overflow-y: auto;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     padding: 0.5rem;
@@ -101,7 +102,7 @@
 
 .dixeo-tutor-teach-pane {
     flex: 0 0 auto;
-    max-height: min(60vh, 100%);
+    max-height: 60vh;
     overflow-y: auto;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     padding: 0.5rem;
@@ -537,7 +538,7 @@
 }
 
 .dixeo-tutor-message-assistant:before {
-    content:"\f075"; /* It is the content of fa fa-comment */
+    content: "\f075"; /* It is the content of fa fa-comment */
     font-family: "Font Awesome 6 Free", FontAwesome, sans-serif; /* Needed to display the icon */
     position: absolute; /* We put it on the right of the content */
     top: 0.7rem;
@@ -634,7 +635,7 @@
 }
 
 .dixeo-tutor-separator span {
-    color: rgba(0,0,0,.3);
+    color: rgba(0, 0, 0, .3);
     font-size: 0.8rem;
 }
 
@@ -741,8 +742,11 @@ body:not(.editing) .drawercontent .block_dixeo_tutor > .card-body {
 .chat-dots span:nth-child(3) {
     animation-delay: 0.4s;
 }
+
 @keyframes chat-dots {
-    0%, 80%, 100% {
+    0%,
+    80%,
+    100% {
         transform: scale(0);
         opacity: 0.3;
     }
@@ -766,11 +770,11 @@ body:not(.editing) .drawercontent .block_dixeo_tutor > .card-body {
 }
 
 /* Editing mode styles */
-.editing .drawercontent .block_dixeo_tutor>.card-body {
+.editing .drawercontent .block_dixeo_tutor > .card-body {
     display: block;
 }
 
-.editing .drawercontent .block_dixeo_tutor>.card-body>.card-text {
+.editing .drawercontent .block_dixeo_tutor > .card-body > .card-text {
     display: block;
     margin-top: 25px !important;
 }
@@ -970,7 +974,6 @@ body.dixeo-tutor-resize--dragging {
     align-items: center;
     justify-content: center;
     transition: background-color 0.2s ease;
-    transition: 0.2s;
 }
 
 .dixeo-tutor-popup-btn:hover {

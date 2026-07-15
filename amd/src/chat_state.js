@@ -10,6 +10,9 @@ define([
             this.userid = userid;
             this.pending = false;
             this.lastRenderedId = null;
+            // Draft message bodies stay in memory only (audit: no personal content in Web Storage).
+            this.draftMessage = '';
+            // Non-sensitive poll checkpoint (jobId / pending) uses localStorage for cross-tab sync.
             this.storage = StorageService.namespace(`${userid}_${courseid}`);
         }
 
@@ -34,17 +37,15 @@ define([
         }
 
         getDraft() {
-            return this.storage.get('draft', '');
+            return this.draftMessage || '';
         }
 
         setDraft(message) {
-            this.storage.set('draft', message, {
-                expiry: Date.now() + constants.polling.STATE_EXPIRY_MS
-            });
+            this.draftMessage = message || '';
         }
 
         clearDraft() {
-            this.storage.remove('draft');
+            this.draftMessage = '';
         }
 
         savePollState(state) {
@@ -70,6 +71,7 @@ define([
         }
 
         clearAll() {
+            this.clearDraft();
             this.storage.clear();
         }
 

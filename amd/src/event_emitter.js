@@ -1,4 +1,4 @@
-define([], function () {
+define([], function() {
     'use strict';
 
     return class EventEmitter extends EventTarget {
@@ -17,7 +17,7 @@ define([], function () {
             // Creates a wrapper function to extract the 'detail' property from the CustomEvent.
             const wrapper = e => listener(e.detail);
             // Stores a reference to the wrapper on the original listener for easy removal.
-            listener.__dixeo_wrapper = wrapper;
+            listener._dixeoWrapper = wrapper;
             this.addEventListener(type, wrapper);
 
             // Track this listener for complete cleanup.
@@ -34,7 +34,7 @@ define([], function () {
          */
         off(type, listener) {
             // Retrieves the wrapper function stored during 'on', or uses the listener itself.
-            const wrapper = listener.__dixeo_wrapper || listener;
+            const wrapper = listener._dixeoWrapper || listener;
             this.removeEventListener(type, wrapper);
 
             // Remove from tracking map.
@@ -53,7 +53,7 @@ define([], function () {
          * @param {*} [detail=null] The data to pass with the event.
          */
         emit(type, detail = null) {
-            this.dispatchEvent(new CustomEvent(type, { detail }));
+            this.dispatchEvent(new CustomEvent(type, {detail}));
         }
 
         /**

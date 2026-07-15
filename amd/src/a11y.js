@@ -48,13 +48,17 @@ define(['block_dixeo_tutor/constants', 'core/str'], function(constants, str) {
          * @param {string} itemSelector Selector for navigable items
          */
         setupKeyboardNavigation(container, itemSelector) {
-            if (!container) { return; }
+            if (!container) {
+                return;
+            }
 
             let currentIndex = -1;
 
             container.addEventListener('keydown', (e) => {
                 const items = Array.from(container.querySelectorAll(itemSelector));
-                if (items.length === 0) { return; }
+                if (items.length === 0) {
+                    return;
+                }
 
                 switch (e.key) {
                     case 'ArrowDown':
@@ -112,7 +116,7 @@ define(['block_dixeo_tutor/constants', 'core/str'], function(constants, str) {
                 const target = document.getElementById(targetId);
                 if (target) {
                     target.focus();
-                    target.scrollIntoView({ behavior: 'smooth' });
+                    target.scrollIntoView({behavior: 'smooth'});
                 }
             });
 
@@ -130,6 +134,7 @@ define(['block_dixeo_tutor/constants', 'core/str'], function(constants, str) {
                 components.messagesContainer.setAttribute('tabindex', '0');
                 str.get_string('aria_chat_messages', 'block_dixeo_tutor').then(s => {
                     components.messagesContainer.setAttribute('aria-label', s);
+                    return null;
                 }).catch(() => {
                     components.messagesContainer.setAttribute('aria-label', 'Chat messages');
                 });
@@ -140,6 +145,7 @@ define(['block_dixeo_tutor/constants', 'core/str'], function(constants, str) {
                 components.inputField.setAttribute('aria-invalid', 'false');
                 str.get_string('aria_type_message', 'block_dixeo_tutor').then(s => {
                     components.inputField.setAttribute('aria-label', s);
+                    return null;
                 }).catch(() => {
                     components.inputField.setAttribute('aria-label', 'Type your message');
                 });
@@ -148,6 +154,7 @@ define(['block_dixeo_tutor/constants', 'core/str'], function(constants, str) {
             if (components.sendButton) {
                 str.get_string('aria_send_message', 'block_dixeo_tutor').then(s => {
                     components.sendButton.setAttribute('aria-label', s);
+                    return null;
                 }).catch(() => {
                     components.sendButton.setAttribute('aria-label', 'Send message');
                 });

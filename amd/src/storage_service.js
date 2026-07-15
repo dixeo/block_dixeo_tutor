@@ -3,12 +3,50 @@ define(['block_dixeo_tutor/memory_storage_adapter'], function(MemoryStorageAdapt
 
     /**
      * Lightweight localStorage wrapper with namespace and expiry support.
-     * Falls back to an in-memory store when localStorage is unavailable (private browsing, etc.).
+     * Falls back to an in-memory store when localStorage is unavailable.
+     *
+     * Used only for non-sensitive technical state (e.g. poll checkpoints).
+     * Message draft bodies must not be written here.
      */
     class StorageService {
         constructor(prefix) {
             this.prefix = prefix || 'dixeo_tutor_';
             this.storage = this._getStorage();
+            this._clearLegacyDrafts();
+        }
+
+        /**
+         * Remove draft keys left by older builds that persisted message text,
+         * and drop interim sessionStorage poll keys from the sessionStorage-only build.
+         * Leaves localStorage poll checkpoints intact for cross-tab sync.
+         * @private
+         */
+        _clearLegacyDrafts() {
+            const clearDraftKeys = (store) => {
+                try {
+                    for (let i = store.length - 1; i >= 0; i--) {
+                        const key = store.key(i);
+                        if (key && key.startsWith('dixeo_tutor_') && key.endsWith('_draft')) {
+                            store.removeItem(key);
+                        }
+                    }
+                } catch (e) {
+                    // Ignore unavailable storage.
+                }
+            };
+            clearDraftKeys(localStorage);
+            try {
+                clearDraftKeys(sessionStorage);
+                // Interim build stored poll checkpoints in sessionStorage; remove those leftovers.
+                for (let i = sessionStorage.length - 1; i >= 0; i--) {
+                    const key = sessionStorage.key(i);
+                    if (key && key.startsWith('dixeo_tutor_') && key.endsWith('_polling')) {
+                        sessionStorage.removeItem(key);
+                    }
+                }
+            } catch (e) {
+                // Ignore.
+            }
         }
 
         /**
@@ -18,7 +56,7 @@ define(['block_dixeo_tutor/memory_storage_adapter'], function(MemoryStorageAdapt
          */
         _getStorage() {
             try {
-                const key = '__test__';
+                const key = '__dixeo_tutor_test__';
                 localStorage.setItem(key, 'x');
                 localStorage.removeItem(key);
                 return localStorage;
@@ -54,7 +92,9 @@ define(['block_dixeo_tutor/memory_storage_adapter'], function(MemoryStorageAdapt
         get(key, defaultValue) {
             try {
                 const stored = this.storage.getItem(this._getKey(key));
-                if (!stored) { return arguments.length > 1 ? defaultValue : null; }
+                if (!stored) {
+                    return arguments.length > 1 ? defaultValue : null;
+                }
                 const data = JSON.parse(stored);
                 if (data.expiry && Date.now() > data.expiry) {
                     this.remove(key);

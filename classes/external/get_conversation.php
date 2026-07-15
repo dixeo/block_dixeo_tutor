@@ -37,7 +37,6 @@ use local_dixeo\external\service_factory;
  * External function to get conversation history.
  */
 class get_conversation extends external_api {
-
     /**
      * Define parameters for the web service.
      *
@@ -78,9 +77,11 @@ class get_conversation extends external_api {
             );
 
             return ['messages' => $messages];
-
         } catch (api_exception $e) {
-            debugging('Tutor get_conversation failed: ' . $e->getMessage(), DEBUG_DEVELOPER);
+            debugging(
+                'Tutor get_conversation failed: ' . $e->get_error_code(),
+                DEBUG_DEVELOPER
+            );
             return ['messages' => []];
         }
     }

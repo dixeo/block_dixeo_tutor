@@ -25,19 +25,20 @@
 
 namespace block_dixeo_tutor\external;
 
+use block_dixeo_tutor\client_response;
+use block_dixeo_tutor\job_ownership;
+use block_dixeo_tutor\page_context;
 use core_external\external_api;
 use core_external\external_function_parameters;
 use core_external\external_single_structure;
 use core_external\external_value;
 use local_dixeo\api\exception\api_exception;
-use local_dixeo\external\response_factory;
 use local_dixeo\external\service_factory;
 
 /**
  * External function to submit a tutor message.
  */
 class send_message extends external_api {
-
     /**
      * Define parameters for the web service.
      *
@@ -58,6 +59,7 @@ class send_message extends external_api {
      *
      * @param int $courseid The course ID.
      * @param string $message The user message.
+     * @param string $pageurl The current page URL.
      * @return array The pending operation result with job_id.
      */
     public static function execute(int $courseid, string $message, string $pageurl = ''): array {
@@ -83,8 +85,8 @@ class send_message extends external_api {
         }
         $params['message'] = $message;
 
-        // Use the page URL sent by the client as page context.
-        $pagecontext = !empty($params['pageurl']) ? $params['pageurl'] : '';
+        // Restrict page context to this Moodle site and drop query/fragment; never trust raw client URLs.
+        $pagecontext = page_context::sanitize_pageurl($params['pageurl'] ?? '', (int) $params['courseid']);
 
         try {
             $service = service_factory::get_tutor_service();
@@ -95,10 +97,14 @@ class send_message extends external_api {
                 $pagecontext
             );
 
-            return $result->to_array();
+            $payload = $result->to_array();
+            if (!empty($payload['jobid'])) {
+                job_ownership::register((int) $USER->id, (int) $params['courseid'], (string) $payload['jobid']);
+            }
 
+            return client_response::sanitize_send_message($payload);
         } catch (api_exception $e) {
-            return response_factory::job_error($e);
+            return client_response::send_message_error($e);
         }
     }
 
@@ -120,7 +126,7 @@ class send_message extends external_api {
             'creditsused' => new external_value(PARAM_INT, 'Credits consumed', VALUE_OPTIONAL),
             'status' => new external_value(PARAM_ALPHA, 'Current status', VALUE_OPTIONAL),
             'progress' => new external_value(PARAM_INT, 'Progress percentage (0-100)'),
-            'errormessage' => new external_value(PARAM_RAW, 'Error message if failed', VALUE_OPTIONAL),
+            'errormessage' => new external_value(PARAM_TEXT, 'Error message if failed', VALUE_OPTIONAL),
             'errorcode' => new external_value(PARAM_ALPHANUMEXT, 'Error code if failed', VALUE_OPTIONAL),
         ]);
     }
