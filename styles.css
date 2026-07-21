@@ -676,7 +676,6 @@ body:not(.editing) .drawercontent .block_dixeo_tutor > .card-body {
 .drawercontent .block_dixeo_tutor #dixeo-tutor-messages {
     flex: 1;
     overflow-y: auto;
-    min-height: 290px !important;
 }
 .drawercontent .block_dixeo_tutor .card-footer {
     flex-shrink: 0;
@@ -849,7 +848,6 @@ body:not(.editing) .drawercontent .block_dixeo_tutor > .card-body {
 #dixeo-tutor-popup-container #dixeo-tutor-messages {
     flex: 1;
     overflow-y: auto;
-    min-height: 200px;
 }
 
 #dixeo-tutor-popup-container .card-footer {
