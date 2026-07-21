@@ -25,6 +25,7 @@
 
 namespace block_dixeo_tutor\external;
 
+use block_dixeo_tutor\event\conversation_viewed;
 use core_external\external_api;
 use core_external\external_function_parameters;
 use core_external\external_multiple_structure;
@@ -75,6 +76,13 @@ class get_conversation extends external_api {
                 $USER->id,
                 $params['sinceid']
             );
+
+            conversation_viewed::create_for_course(
+                (int) $params['courseid'],
+                (int) $USER->id,
+                count($messages),
+                (string) $params['sinceid']
+            )->trigger();
 
             return ['messages' => $messages];
         } catch (api_exception $e) {

@@ -45,6 +45,12 @@ $string['error_job_access'] = 'Der Auftragsstatus konnte nicht abgerufen werden.
 $string['error_network'] = 'Netzwerkfehler. Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.';
 $string['error_timeout'] = 'Zeitüberschreitung der Anfrage. Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.';
 $string['errorsendmessage'] = 'Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.';
+$string['eventconversationviewed'] = 'Dixeo-Tutor-Konversation angesehen';
+$string['eventconversationvieweddesc'] = 'Der Benutzer mit der ID \'{$a->userid}\' hat die Tutor-Konversation im Kurs \'{$a->courseid}\' angesehen (messagecount={$a->messagecount}, sinceid=\'{$a->sinceid}\').';
+$string['eventjobstatusviewed'] = 'Dixeo-Tutor-Jobstatus angesehen';
+$string['eventjobstatusvieweddesc'] = 'Der Benutzer mit der ID \'{$a->userid}\' hat den Tutor-Jobstatus im Kurs \'{$a->courseid}\' angesehen (jobid=\'{$a->jobid}\', status=\'{$a->status}\').';
+$string['eventmessagesent'] = 'Dixeo-Tutor-Nachricht gesendet';
+$string['eventmessagesentdesc'] = 'Der Benutzer mit der ID \'{$a->userid}\' hat eine Tutor-Nachricht im Kurs \'{$a->courseid}\' gesendet (jobid=\'{$a->jobid}\').';
 $string['filecountlimit'] = 'Der KI-Tutor ist auf 150 Dateien pro Kurs beschränkt (derzeit {$a} Dateien). Bitte reduzieren Sie bei Bedarf die Anzahl der Dateien.';
 $string['message_too_long'] = 'Die Nachricht darf maximal {$a} Zeichen enthalten.';
 $string['notenrolled'] = 'Sie müssen in diesen Kurs eingeschrieben sein, um den Tutor zu nutzen.';

@@ -26,6 +26,7 @@
 namespace block_dixeo_tutor\external;
 
 use block_dixeo_tutor\client_response;
+use block_dixeo_tutor\event\message_sent;
 use block_dixeo_tutor\job_ownership;
 use block_dixeo_tutor\page_context;
 use core_external\external_api;
@@ -100,6 +101,11 @@ class send_message extends external_api {
             $payload = $result->to_array();
             if (!empty($payload['jobid'])) {
                 job_ownership::register((int) $USER->id, (int) $params['courseid'], (string) $payload['jobid']);
+                message_sent::create_for_course(
+                    (int) $params['courseid'],
+                    (int) $USER->id,
+                    (string) $payload['jobid']
+                )->trigger();
             }
 
             return client_response::sanitize_send_message($payload);
