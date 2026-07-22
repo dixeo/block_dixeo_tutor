@@ -46,6 +46,7 @@ use local_dixeo\service\tutor_service;
  * @covers \block_dixeo_tutor\external\send_message
  * @covers \block_dixeo_tutor\external\get_conversation
  * @covers \block_dixeo_tutor\external\get_job_status
+ * @covers \block_dixeo_tutor\job_status_audit
  */
 final class tutor_events_test extends \advanced_testcase {
     /** @var string Valid UUID for mocked tutor jobs. */
@@ -181,6 +182,80 @@ final class tutor_events_test extends \advanced_testcase {
         $this->assertCount(0, $events, 'Polling must not emit job_status_viewed on every request.');
     }
 
+    public function test_get_job_status_emits_job_status_viewed_once_when_completed(): void {
+        [$course, $user] = $this->create_course_and_student();
+
+        job_ownership::register((int) $user->id, (int) $course->id, self::JOB_ID);
+
+        $status = new job_status(
+            jobid: self::JOB_ID,
+            type: 'tutor_message',
+            status: job_status::STATUS_COMPLETED,
+            progress: 100,
+            createdat: time(),
+            result: ['reply' => 'Secret assistant reply']
+        );
+
+        $jobservice = $this->createMock(job_service::class);
+        $jobservice->method('get_job_status')->willReturn($status);
+        service_factory::set_test_job_service($jobservice);
+
+        $sink = $this->redirectEvents();
+        $first = get_job_status::execute((int) $course->id, self::JOB_ID);
+        $second = get_job_status::execute((int) $course->id, self::JOB_ID);
+
+        $this->assertSame(job_status::STATUS_COMPLETED, $first['status']);
+        $this->assertSame(job_status::STATUS_COMPLETED, $second['status']);
+
+        $events = array_values(array_filter(
+            $sink->get_events(),
+            static fn($event) => $event instanceof job_status_viewed
+        ));
+        $this->assertCount(1, $events);
+        $this->assertEquals((int) $course->id, (int) $events[0]->courseid);
+        $this->assertEquals((int) $user->id, (int) $events[0]->userid);
+        $this->assertSame(self::JOB_ID, $events[0]->other['jobid']);
+        $this->assertSame(job_status::STATUS_COMPLETED, $events[0]->other['status']);
+        $this->assert_minimal_tutor_other($events[0]);
+        $this->assertStringNotContainsString('Secret', $events[0]->get_description());
+    }
+
+    public function test_get_job_status_emits_job_status_viewed_for_failed_and_cancelled(): void {
+        [$course, $user] = $this->create_course_and_student();
+
+        job_ownership::register((int) $user->id, (int) $course->id, self::JOB_ID);
+
+        foreach (['failed', 'cancelled'] as $terminalstatus) {
+            global $SESSION;
+            unset($SESSION->block_dixeo_tutor_terminal_status_audit);
+
+            $status = new job_status(
+                jobid: self::JOB_ID,
+                type: 'tutor_message',
+                status: $terminalstatus,
+                progress: 0,
+                createdat: time()
+            );
+
+            $jobservice = $this->createMock(job_service::class);
+            $jobservice->method('get_job_status')->willReturn($status);
+            service_factory::set_test_job_service($jobservice);
+
+            $sink = $this->redirectEvents();
+            $result = get_job_status::execute((int) $course->id, self::JOB_ID);
+
+            $this->assertSame($terminalstatus, $result['status']);
+
+            $events = array_values(array_filter(
+                $sink->get_events(),
+                static fn($event) => $event instanceof job_status_viewed
+            ));
+            $this->assertCount(1, $events, "Expected one event for status {$terminalstatus}");
+            $this->assertSame($terminalstatus, $events[0]->other['status']);
+            $this->assert_minimal_tutor_other($events[0]);
+        }
+    }
+
     public function test_job_status_viewed_event_has_minimal_other(): void {
         [$course, $user] = $this->create_course_and_student();
 
@@ -189,7 +264,7 @@ final class tutor_events_test extends \advanced_testcase {
             (int) $course->id,
             (int) $user->id,
             self::JOB_ID,
-            job_status::STATUS_PROCESSING
+            job_status::STATUS_COMPLETED
         )->trigger();
 
         $events = array_values(array_filter(
@@ -200,7 +275,7 @@ final class tutor_events_test extends \advanced_testcase {
         $this->assertEquals((int) $course->id, (int) $events[0]->courseid);
         $this->assertEquals((int) $user->id, (int) $events[0]->userid);
         $this->assertSame(self::JOB_ID, $events[0]->other['jobid']);
-        $this->assertSame(job_status::STATUS_PROCESSING, $events[0]->other['status']);
+        $this->assertSame(job_status::STATUS_COMPLETED, $events[0]->other['status']);
         $this->assert_minimal_tutor_other($events[0]);
         $this->assertStringNotContainsString('Secret', $events[0]->get_description());
     }

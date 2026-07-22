@@ -26,8 +26,8 @@
 namespace block_dixeo_tutor\external;
 
 use block_dixeo_tutor\client_response;
-use block_dixeo_tutor\event\job_status_viewed;
 use block_dixeo_tutor\job_ownership;
+use block_dixeo_tutor\job_status_audit;
 use core_external\external_api;
 use core_external\external_function_parameters;
 use core_external\external_single_structure;
@@ -78,17 +78,12 @@ class get_job_status extends external_api {
             $service = service_factory::get_job_service();
             $status = $service->get_job_status($params['jobid']);
 
-            // Triggering an event with every poll would cause too much noise in the logs.
-            // phpcs:disable Squiz.PHP.CommentedOutCode.Found
-            /*
-            job_status_viewed::create_for_course(
+            job_status_audit::maybe_emit_terminal_viewed(
                 (int) $params['courseid'],
                 (int) $USER->id,
                 $params['jobid'],
                 $status->status
-            )->trigger();
-            */
-            // phpcs:enable Squiz.PHP.CommentedOutCode.Found
+            );
 
             return client_response::sanitize_job_status($status->to_array());
         } catch (api_exception $e) {
